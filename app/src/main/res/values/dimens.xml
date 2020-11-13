@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content" />
+    <dimen name="content.bottom" />
+    <dimen name="content.bottom.margin">20dp</dimen>
+    <dimen name="content.top" />
+    <dimen name="content.top.margin">20dp</dimen>
+    <dimen name="content.start" />
+    <dimen name="content.start.margin">16dp</dimen>
+    <dimen name="content.end" />
+    <dimen name="content.end.margin">16dp</dimen>
+
+    <dimen name="text" />
+    <dimen name="text.title" />
+    <dimen name="text.title.size">32sp</dimen>
+    <dimen name="text.body" />
+    <dimen name="text.body.size">14sp</dimen>
+    <dimen name="text.body.space">4sp</dimen>
+</resources>

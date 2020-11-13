@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyCareer</string>
+
+    <string name="login" />
+    <string name="login.without_user">¿Aún no tienes usuario?</string>
+    <string name="login.registry">Regístrate</string>
+    <string name="login.email">Correo</string>
+    <string name="login.pass">Contraseña</string>
+    <string name="login.login">Ingresar</string>
+</resources>
