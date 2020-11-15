@@ -19,6 +19,48 @@ allprojects {
         google()
         jcenter()
     }
+
+    def versions = [
+            KtxCore            : '1.3.2',
+            Coroutines         : '1.3.7',
+            AppCompat          : '1.2.0',
+            Material           : '1.2.1',
+            ContraintLayout    : '2.0.4',
+            NavigationComponent: '2.3.1',
+
+            JUnit              : '4.13.1',
+            JUnitExt           : '1.1.2',
+            EspressoCore       : '3.3.0'
+    ]
+
+    ext {
+        coroutines = [
+                KtxCore          : "androidx.core:core-ktx:${versions.KtxCore}",
+                CoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.Coroutines}",
+                CoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.Coroutines}"
+        ]
+
+        androidX = [
+                AppCompat            : "androidx.appcompat:appcompat:${versions.AppCompat}",
+                ConstraintLayout     : "androidx.constraintlayout:constraintlayout:${versions.ContraintLayout}",
+                NavigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.NavigationComponent}",
+                NavigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.NavigationComponent}"
+        ]
+
+        material = [
+                Material: "com.google.android.material:material:${versions.Material}"
+        ]
+
+        unitTest = [
+                JUnit: "junit:junit:${versions.JUnit}"
+        ]
+
+        androidTest = [
+                JUnitExt    : "junit:junit:${versions.JUnitExt}",
+                EspressoCore: "androidx.test.espresso:espresso-core:${versions.EspressoCore}",
+                Navigation: "androidx.navigation:navigation-testing:${versions.NavigationComponent}"
+        ]
+    }
 }
 
 task clean(type: Delete) {
