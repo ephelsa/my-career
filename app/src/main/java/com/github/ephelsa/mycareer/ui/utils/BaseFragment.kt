@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
@@ -12,6 +14,10 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     protected val binding: Binding get() = _binding!!
 
     abstract fun initializeBinding(inflater: LayoutInflater, container: ViewGroup?): Binding
+
+    protected fun navigate(direction: NavDirections) {
+        findNavController().navigate(direction)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
