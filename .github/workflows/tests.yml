@@ -1,10 +1,10 @@
-name: Android Lint
+name: Android Tests
 
 on: [push, pull_request]
 
 jobs:
   build:
-    name: Check lint
+    name: Check Tests
     runs-on: ubuntu-latest
 
     steps:
