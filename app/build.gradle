@@ -27,7 +27,7 @@ def apiFile = 'api.properties'
 android {
     signingConfigs {
         release {
-            storeFile file(rootProject.file('upload-keystore.jks'))
+            storeFile file(rootProject.file('app/upload-keystore.jks'))
             storePassword readProperty('STORE_PASSWORD', keystoreFile)
             keyAlias readProperty('KEY_ALIAS', keystoreFile)
             keyPassword readProperty('KEY_PASSWORD', keystoreFile)
