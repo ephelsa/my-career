@@ -9,6 +9,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:4.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
+        def nav_version = "2.3.1"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -30,7 +32,10 @@ allprojects {
 
             JUnit              : '4.13.1',
             JUnitExt           : '1.1.2',
-            EspressoCore       : '3.3.0'
+            EspressoCore       : '3.3.0',
+            AndroidJUnit4      : '1.1.2',
+
+            FragmentTesting    : '1.2.5'
     ]
 
     ext {
@@ -44,7 +49,7 @@ allprojects {
                 AppCompat            : "androidx.appcompat:appcompat:${versions.AppCompat}",
                 ConstraintLayout     : "androidx.constraintlayout:constraintlayout:${versions.ContraintLayout}",
                 NavigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.NavigationComponent}",
-                NavigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.NavigationComponent}"
+                NavigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.NavigationComponent}",
         ]
 
         material = [
@@ -56,12 +61,16 @@ allprojects {
         ]
 
         androidTest = [
-                JUnitExt    : "junit:junit:${versions.JUnitExt}",
-                EspressoCore: "androidx.test.espresso:espresso-core:${versions.EspressoCore}",
-                Navigation: "androidx.navigation:navigation-testing:${versions.NavigationComponent}"
+                JUnitExt     : "junit:junit:${versions.JUnitExt}",
+                EspressoCore : "androidx.test.espresso:espresso-core:${versions.EspressoCore}",
+                Navigation   : "androidx.navigation:navigation-testing:${versions.NavigationComponent}",
+                AndroidJUnit4: "androidx.test.ext:junit-ktx:${versions.AndroidJUnit4}",
+                FragmentTesting: "androidx.fragment:fragment-testing:${versions.FragmentTesting}"
         ]
     }
 }
+
+//implementation 'androidx.test.ext:junit-ktx:1.1.2'
 
 task clean(type: Delete) {
     delete rootProject.buildDir
