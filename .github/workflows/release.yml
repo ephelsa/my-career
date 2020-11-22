@@ -34,7 +34,7 @@ jobs:
       
     - name: Build Release APK
       id: release_version
-      run: ./gradlew assembleRelease --stacktrace -PSTORE_PASSWORD="{{ secrets.STORE_PASSWORD }}" -PKEY_ALIAS="{{ secrets.KEY_ALIAS }}" -PKEY_PASSWORD="{{ secrets.KEY_PASSWORD }}" -PURL_BASE="{{ secrets.URL_BASE }}"
+      run: ./gradlew assembleRelease --stacktrace -PSTORE_PASSWORD={{ secrets.STORE_PASSWORD }} -PKEY_ALIAS={{ secrets.KEY_ALIAS }} -PKEY_PASSWORD={{ secrets.KEY_PASSWORD }} -PURL_BASE={{ secrets.URL_BASE }}
       
     - name: Extract gradle version
       run: |
