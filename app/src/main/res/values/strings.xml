@@ -7,4 +7,14 @@
     <string name="login.email">Correo</string>
     <string name="login.pass">Contraseña</string>
     <string name="login.login">Ingresar</string>
+
+    <string name="registry" />
+    <string name="registry.complete_registry">Completar registro</string>
+    <string name="registry.has_user">¿Tienes usuario?</string>
+    <string name="registry.login">Inicia sesión</string>
+    <string name="registry.first_name">Primer nombre</string>
+    <string name="registry.second_name">Segundo nombre</string>
+    <string name="registry.first_surname">Primer apellido</string>
+    <string name="registry.second_surname">Segundo apellido</string>
+
 </resources>

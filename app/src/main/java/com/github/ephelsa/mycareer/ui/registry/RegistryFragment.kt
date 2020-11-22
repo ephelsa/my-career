@@ -1,20 +1,21 @@
-package com.github.ephelsa.mycareer.ui.login
+package com.github.ephelsa.mycareer.ui.registry
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.ephelsa.mycareer.databinding.LoginFragmentBinding
+import androidx.navigation.fragment.findNavController
+import com.github.ephelsa.mycareer.databinding.FragmentRegistryBinding
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 
-class LoginFragment : BaseFragment<LoginFragmentBinding>(), View.OnClickListener {
-
-    private val directions = LoginFragmentDirections
+class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickListener {
 
     override fun initializeBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): LoginFragmentBinding = LoginFragmentBinding.inflate(inflater, container, false)
+    ): FragmentRegistryBinding {
+        return FragmentRegistryBinding.inflate(inflater, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,14 +24,13 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(), View.OnClickListener
 
     private fun bindClickListener() {
         with(binding) {
-            registryButton.setOnClickListener(this@LoginFragment)
-            loginButton.setOnClickListener(this@LoginFragment)
+            loginButton.setOnClickListener(this@RegistryFragment)
         }
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.registryButton -> navigate(directions.registryFragment())
+            binding.loginButton -> findNavController().popBackStack()
         }
     }
 }

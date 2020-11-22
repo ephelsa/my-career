@@ -9,5 +9,19 @@
         android:id="@+id/loginFragment"
         android:name="com.github.ephelsa.mycareer.ui.login.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/registry_fragment"
+            app:destination="@id/registryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popExitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/registryFragment"
+        android:name="com.github.ephelsa.mycareer.ui.registry.RegistryFragment"
+        android:label="fragment_registry"
+        tools:layout="@layout/fragment_registry" />
 </navigation>
