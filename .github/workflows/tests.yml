@@ -17,6 +17,6 @@ jobs:
         java-version: 1.8
         
     - name: Unit tests
-      run: ./gradlew test
+      run: ./gradlew test -PSTORE_FILE="{{ secrets.STORE_FILE }}" -PSTORE_PASSWORD="{{ secrets.STORE_PASSWORD }}" -PKEY_ALIAS="{{ secrets.KEY_ALIAS }}" -PKEY_PASSWORD="{{ secrets.KEY_PASSWORD }}" -PURL_BASE="{{ secrets.URL_BASE }}"
     
     # TODO: e2e
