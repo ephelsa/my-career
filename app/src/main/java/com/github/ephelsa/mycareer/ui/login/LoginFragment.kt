@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.ephelsa.mycareer.databinding.LoginFragmentBinding
+import com.github.ephelsa.mycareer.databinding.FragmentLoginBinding
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 
-class LoginFragment : BaseFragment<LoginFragmentBinding>(), View.OnClickListener {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener {
 
     private val directions = LoginFragmentDirections
 
     override fun initializeBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): LoginFragmentBinding = LoginFragmentBinding.inflate(inflater, container, false)
+    ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

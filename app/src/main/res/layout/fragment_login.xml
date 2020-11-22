@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/content.start.margin"
-    android:layout_marginTop="@dimen/content.top.margin"
-    android:layout_marginEnd="@dimen/content.end.margin"
-    android:layout_marginBottom="@dimen/content.bottom.margin"
+    android:layout_marginStart="@dimen/content_start"
+    android:layout_marginTop="@dimen/content_top"
+    android:layout_marginEnd="@dimen/content_eEnd"
+    android:layout_marginBottom="@dimen/content_bottom"
     tools:context=".ui.login.LoginFragment">
 
     <LinearLayout
@@ -37,15 +37,15 @@
             style="@style/Text.Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/text.body.space"
-            android:text="@string/login.without_user" />
+            android:layout_marginEnd="@dimen/spacing_tiny"
+            android:text="@string/login_without_user" />
 
         <TextView
             android:id="@+id/registry_button"
             style="@style/Text.Body.Action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login.registry" />
+            android:text="@string/login_registry" />
 
     </LinearLayout>
 
@@ -61,9 +61,9 @@
             android:id="@+id/email_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/content.bottom.margin"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:background="@android:color/transparent"
-            android:hint="@string/login.email"
+            android:hint="@string/login_email"
             app:boxBackgroundColor="@android:color/transparent">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -78,8 +78,9 @@
             android:id="@+id/password_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
             android:background="@android:color/transparent"
-            android:hint="@string/login.pass"
+            android:hint="@string/login_pass"
             app:boxBackgroundColor="@android:color/transparent"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/blue_jeans">
@@ -96,10 +97,10 @@
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content.top.margin"
-            android:text="@string/login.login"
+            android:layout_marginTop="@dimen/content_top"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:drawableTint="@color/white"/>
+            android:drawableTint="@color/white"
+            android:text="@string/login_login" />
 
     </LinearLayout>
 

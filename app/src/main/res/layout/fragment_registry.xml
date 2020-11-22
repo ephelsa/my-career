@@ -26,10 +26,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/content.start.margin"
-        android:layout_marginTop="@dimen/content.top.margin"
-        android:layout_marginEnd="@dimen/content.end.margin"
-        android:layout_marginBottom="@dimen/content.bottom.margin"
+        android:layout_marginStart="@dimen/content_start"
+        android:layout_marginTop="@dimen/content_top"
+        android:layout_marginEnd="@dimen/content_eEnd"
+        android:layout_marginBottom="@dimen/content_bottom"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/form.bottom.space"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -52,15 +52,15 @@
                     android:id="@+id/first_name_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/form.end.space"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
                     android:layout_weight="1"
-                    android:hint="@string/registry.first_name">
+                    android:hint="@string/registry_first_name">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/first_name_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,15 +68,15 @@
                     android:id="@+id/second_name_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/form.start.space"
+                    android:layout_marginStart="@dimen/spacing_tiny"
                     android:layout_weight="1"
-                    android:hint="@string/registry.second_name">
+                    android:hint="@string/registry_second_name">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/second_name_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +86,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/form.top.space"
-                android:layout_marginBottom="@dimen/form.bottom.space"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -95,15 +95,15 @@
                     android:id="@+id/first_surname_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/form.end.space"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
                     android:layout_weight="1"
-                    android:hint="@string/registry.first_surname">
+                    android:hint="@string/registry_first_surname">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/first_surname_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,15 +111,15 @@
                     android:id="@+id/second_surname_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/form.start.space"
+                    android:layout_marginStart="@dimen/spacing_tiny"
                     android:layout_weight="1"
-                    android:hint="@string/registry.second_surname">
+                    android:hint="@string/registry_second_surname">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/second_surname_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapWords" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,12 +133,13 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/content.start.margin"
-        android:layout_marginEnd="@dimen/content.end.margin"
-        android:layout_marginBottom="@dimen/content.bottom.margin"
+        android:layout_marginStart="@dimen/content_start"
+        android:layout_marginEnd="@dimen/content_eEnd"
+        android:layout_marginBottom="@dimen/content_bottom"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:viewBindingIgnore="true">
 
         <Button
             android:id="@+id/complete_registry_button"
@@ -146,7 +147,7 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_baseline_check_24"
             android:drawableTint="@color/white"
-            android:text="@string/registry.complete_registry" />
+            android:text="@string/registry_complete_registry" />
 
         <LinearLayout
             android:id="@+id/footer_container"
@@ -159,15 +160,15 @@
                 style="@style/Text.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/text.body.space"
-                android:text="@string/registry.has_user" />
+                android:layout_marginEnd="@dimen/spacing_tiny"
+                android:text="@string/registry_has_user" />
 
             <TextView
                 android:id="@+id/login_button"
                 style="@style/Text.Body.Action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/registry.login" />
+                android:text="@string/registry_login" />
 
         </LinearLayout>
 

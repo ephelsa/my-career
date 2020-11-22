@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">MyCareer</string>
 
-    <string name="login" />
-    <string name="login.without_user">¿Aún no tienes usuario?</string>
-    <string name="login.registry">Regístrate</string>
-    <string name="login.email">Correo</string>
-    <string name="login.pass">Contraseña</string>
-    <string name="login.login">Ingresar</string>
+    <!-- Login -->
+    <string name="login_without_user">¿Aún no tienes usuario?</string>
+    <string name="login_registry">Regístrate</string>
+    <string name="login_email">Correo</string>
+    <string name="login_pass">Contraseña</string>
+    <string name="login_login">Ingresar</string>
 
-    <string name="registry" />
-    <string name="registry.complete_registry">Completar registro</string>
-    <string name="registry.has_user">¿Tienes usuario?</string>
-    <string name="registry.login">Inicia sesión</string>
-    <string name="registry.first_name">Primer nombre</string>
-    <string name="registry.second_name">Segundo nombre</string>
-    <string name="registry.first_surname">Primer apellido</string>
-    <string name="registry.second_surname">Segundo apellido</string>
+    <!-- Registry -->
+    <string name="registry_complete_registry">Completar registro</string>
+    <string name="registry_has_user">¿Tienes usuario?</string>
+    <string name="registry_login">Inicia sesión</string>
+    <string name="registry_first_name">Primer nombre</string>
+    <string name="registry_second_name">Segundo nombre</string>
+    <string name="registry_first_surname">Primer apellido</string>
+    <string name="registry_second_surname">Segundo apellido</string>
 
 </resources>

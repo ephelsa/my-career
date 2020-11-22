@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="content" />
-    <dimen name="content.bottom" />
-    <dimen name="content.bottom.margin">20dp</dimen>
-    <dimen name="content.top" />
-    <dimen name="content.top.margin">20dp</dimen>
-    <dimen name="content.start" />
-    <dimen name="content.start.margin">16dp</dimen>
-    <dimen name="content.end" />
-    <dimen name="content.end.margin">16dp</dimen>
+    <!-- distance between parent view and screen bounds -->
+    <dimen name="content_bottom">20dp</dimen>
+    <dimen name="content_top">20dp</dimen>
+    <dimen name="content_start">16dp</dimen>
+    <dimen name="content_eEnd">16dp</dimen>
 
-    <dimen name="text" />
-    <dimen name="text.title" />
-    <dimen name="text.title.size">32sp</dimen>
-    <dimen name="text.body" />
-    <dimen name="text.body.size">14sp</dimen>
-    <dimen name="text.body.space">4sp</dimen>
+    <!-- font sizes  -->
+    <dimen name="font_larger">32sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
 
-    <dimen name="form" />
-    <dimen name="form.end" />
-    <dimen name="form.end.space">4dp</dimen>
-    <dimen name="form.start" />
-    <dimen name="form.start.space">4dp</dimen>
-    <dimen name="form.top" />
-    <dimen name="form.top.space">6dp</dimen>
-    <dimen name="form.bottom" />
-    <dimen name="form.bottom.space">6dp</dimen>
+    <!-- spacing between two views -->
+    <dimen name="spacing_small">6dp</dimen>
+    <dimen name="spacing_tiny">4sp</dimen>
 
 </resources>

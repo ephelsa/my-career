@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MyCareer" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_jeans</item>
         <item name="colorPrimaryVariant">@color/green_blue_crayola</item>
@@ -17,13 +17,13 @@
     <style name="Text" />
 
     <style name="Text.Title">
-        <item name="android:textSize">@dimen/text.title.size</item>
+        <item name="android:textSize">@dimen/font_larger</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/blue_jeans</item>
     </style>
 
     <style name="Text.Body">
-        <item name="android:textSize">@dimen/text.body.size</item>
+        <item name="android:textSize">@dimen/font_normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

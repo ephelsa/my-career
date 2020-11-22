@@ -1,11 +1,35 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+try {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} catch(ignored) {
+    throw new InvalidUserDataException("Must define STORE_PASSWORD, KEY_PASSWORD, KEY_ALIAS, STORE_FILE in keystore.properties file")
+}
+
+def apiPropertiesFile = rootProject.file("api.properties")
+def apiProperties = new Properties()
+try {
+    apiProperties.load(new FileInputStream(apiPropertiesFile))
+} catch(ignored) {
+    throw new InvalidUserDataException("Must define BASE_URL in api.properties file")
+}
+
 android {
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['STORE_FILE'])
+            storePassword keystoreProperties['STORE_PASSWORD']
+            keyAlias keystoreProperties['KEY_ALIAS']
+            keyPassword keystoreProperties['KEY_PASSWORD']
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -21,8 +45,24 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.release
+
+            buildConfigField("String", "API_URL", apiProperties["URL_BASE"])
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+
+            buildConfigField("String", "API_URL", "\"http://192.168.1.8:3000\"")
         }
     }
     compileOptions {
@@ -50,6 +90,6 @@ dependencies {
     implementation androidX.values()
     implementation material.values()
 
-    testImplementation unitTest.JUnit
+    testImplementation unitTest.values()
     androidTestImplementation androidTest.values()
 }
