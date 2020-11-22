@@ -56,7 +56,7 @@ android {
             renderscriptDebuggable false
             signingConfig signingConfigs.release
 
-            buildConfigField("String", "API_URL", readProperty("URL_BASE", apiFile))
+            buildConfigField("String", "API_URL", "${readProperty("URL_BASE", apiFile)}")
         }
         debug {
             debuggable true
