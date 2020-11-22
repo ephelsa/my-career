@@ -3,31 +3,34 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id "org.jlleitschuh.gradle.ktlint" version "9.4.1"
 }
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-try {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-} catch(ignored) {
-    throw new InvalidUserDataException("Must define STORE_PASSWORD, KEY_PASSWORD, KEY_ALIAS, STORE_FILE in keystore.properties file")
+ext.readProperty = { prop, filename ->
+    if (project.hasProperty(prop)) {
+        return project.getProperties().get(prop)
+    } else {
+        Properties properties = new Properties()
+        if (rootProject.file(filename).exists()) {
+            properties.load(new FileInputStream(rootProject.file(filename)))
+        } else {
+            throw new InvalidUserDataException("Must define " + prop + " in " + filename + " file or propject property for build")
+        }
+
+        return properties.getProperty(prop)
+    }
 }
 
-def apiPropertiesFile = rootProject.file("api.properties")
-def apiProperties = new Properties()
-try {
-    apiProperties.load(new FileInputStream(apiPropertiesFile))
-} catch(ignored) {
-    throw new InvalidUserDataException("Must define BASE_URL in api.properties file")
-}
+def keystoreFile = 'keystore.properties'
+def apiFile = 'api.properties'
 
 android {
     signingConfigs {
         release {
-            storeFile file(keystoreProperties['STORE_FILE'])
-            storePassword keystoreProperties['STORE_PASSWORD']
-            keyAlias keystoreProperties['KEY_ALIAS']
-            keyPassword keystoreProperties['KEY_PASSWORD']
+            storeFile file(readProperty('STORE_FILE', keystoreFile))
+            storePassword readProperty('STORE_PASSWORD', keystoreFile)
+            keyAlias readProperty('KEY_ALIAS', keystoreFile)
+            keyPassword readProperty('KEY_PASSWORD', keystoreFile)
         }
     }
     compileSdkVersion 30
@@ -53,7 +56,7 @@ android {
             renderscriptDebuggable false
             signingConfig signingConfigs.release
 
-            buildConfigField("String", "API_URL", apiProperties["URL_BASE"])
+            buildConfigField("String", "API_URL", readProperty("URL_BASE", apiFile))
         }
         debug {
             debuggable true
@@ -62,7 +65,7 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            buildConfigField("String", "API_URL", "\"http://192.168.1.8:3000\"")
+            buildConfigField("String", "API_URL", "\"http://192.168.1.8:3000/\"")
         }
     }
     compileOptions {
