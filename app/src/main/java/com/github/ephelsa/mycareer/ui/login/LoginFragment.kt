@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentLoginBinding
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.tempToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener {
 
     private val directions = LoginFragmentDirections
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this, LoginViewModelProvider()).get(LoginViewModel::class.java)
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
     companion object {
         private val TAG = LoginFragment::class.java.simpleName

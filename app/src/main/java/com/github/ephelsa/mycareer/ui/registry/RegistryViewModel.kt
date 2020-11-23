@@ -1,5 +1,6 @@
 package com.github.ephelsa.mycareer.ui.registry
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.github.ephelsa.mycareer.domain.auth.RegistryRemote
@@ -12,7 +13,7 @@ import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
 import com.github.ephelsa.mycareer.usecase.location.MunicipalitiesByCountryAndDepartmentUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 
-class RegistryViewModel(
+class RegistryViewModel @ViewModelInject constructor(
     uiDispatcher: CoroutineDispatcher,
     private val registerAUserUseCase: RegisterAUserUseCase,
     countriesUseCase: CountriesUseCase,

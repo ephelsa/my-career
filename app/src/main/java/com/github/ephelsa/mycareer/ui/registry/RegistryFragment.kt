@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentRegistryBinding
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.tempToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickListener {
+
+    private val viewModel: RegistryViewModel by viewModels()
 
     companion object {
         private val TAG = RegistryFragment::class.java.simpleName
-    }
-
-    private val viewModel: RegistryViewModel by lazy {
-        ViewModelProvider(this, RegistryViewModelProvider()).get(RegistryViewModel::class.java)
     }
 
     override fun initializeBinding(

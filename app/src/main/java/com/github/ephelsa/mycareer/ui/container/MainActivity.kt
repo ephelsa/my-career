@@ -3,7 +3,9 @@ package com.github.ephelsa.mycareer.ui.container
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.ephelsa.mycareer.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

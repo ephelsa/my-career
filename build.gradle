@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = '1.4.20'
+    ext.nav_version = '2.3.1'
+    ext.hilt_version = '2.28-alpha'
     repositories {
         google()
         jcenter()
@@ -8,9 +10,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        def nav_version = "2.3.1"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -31,6 +32,8 @@ allprojects {
             ContraintLayout    : '2.0.4',
             NavigationComponent: '2.3.1',
             LiveData           : '2.2.0',
+            Hilt               : "${hilt_version}",
+            HiltLifecycle      : '1.0.0-alpha01',
 
             Gson               : '2.8.6',
             Retrofit           : '2.9.0',
@@ -57,12 +60,14 @@ allprojects {
                 ConstraintLayout     : "androidx.constraintlayout:constraintlayout:${versions.ContraintLayout}",
                 NavigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.NavigationComponent}",
                 NavigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.NavigationComponent}",
+                Hilt                 : "com.google.dagger:hilt-android:${versions.Hilt}"
         ]
 
         lifecycle = [
                 LiveData : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.LiveData}",
                 ViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.LiveData}",
-                Runtime  : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.LiveData}"
+                Runtime  : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.LiveData}",
+                Hilt     : "androidx.hilt:hilt-lifecycle-viewmodel:${versions.HiltLifecycle}"
         ]
 
         http = [
@@ -74,6 +79,11 @@ allprojects {
 
         material = [
                 Material: "com.google.android.material:material:${versions.Material}"
+        ]
+
+        kapt = [
+                Hilt         : "com.google.dagger:hilt-android-compiler:${versions.Hilt}",
+                HiltLifecycle: "androidx.hilt:hilt-compiler:${versions.HiltLifecycle}"
         ]
 
         unitTest = [

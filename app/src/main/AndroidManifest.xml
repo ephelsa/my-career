@@ -6,6 +6,7 @@
     <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyCareerApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
