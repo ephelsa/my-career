@@ -1,0 +1,1 @@
+echo $(cat app/build.gradle | grep -i "versionName "  | awk '{print $2}' | sed 's/\"//g')

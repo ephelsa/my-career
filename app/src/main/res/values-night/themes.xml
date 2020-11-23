@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_jeans</item>
+        <item name="colorPrimaryVariant">@color/green_blue_crayola</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="materialButtonStyle">@style/Button</item>
+    </style>
+
+    <style name="Text" />
+
+    <style name="Text.Title">
+        <item name="android:textSize">@dimen/font_larger</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blue_jeans</item>
+    </style>
+
+    <style name="Text.Body">
+        <item name="android:textSize">@dimen/font_normal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Body.Action">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blue_jeans</item>
+    </style>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:drawableTint">@color/black</item>
+    </style>
+
+    <style name="IconButton">
+        <item name="android:tint">@color/white</item>
+    </style>
+
+</resources>

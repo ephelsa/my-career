@@ -1,0 +1,102 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.4.20'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        def nav_version = "2.3.1"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    ext.versions = [
+            KtxCore            : '1.3.2',
+            Coroutines         : '1.3.7',
+
+            AppCompat          : '1.2.0',
+            Material           : '1.2.1',
+            ContraintLayout    : '2.0.4',
+            NavigationComponent: '2.3.1',
+            LiveData           : '2.2.0',
+
+            Moshi              : '1.11.0',
+            Retrofit           : '2.9.0',
+            LogginInterceptor  : '4.9.0',
+
+            JUnit              : '4.13.1',
+            JUnitExt           : '1.1.2',
+            EspressoCore       : '3.3.0',
+            AndroidJUnit4      : '1.1.2',
+            Mockk              : '1.10.2',
+
+            FragmentTesting    : '1.2.5'
+    ]
+
+    ext {
+        coroutines = [
+                KtxCore          : "androidx.core:core-ktx:${versions.KtxCore}",
+                CoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.Coroutines}",
+                CoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.Coroutines}"
+        ]
+
+        androidX = [
+                AppCompat            : "androidx.appcompat:appcompat:${versions.AppCompat}",
+                ConstraintLayout     : "androidx.constraintlayout:constraintlayout:${versions.ContraintLayout}",
+                NavigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:${versions.NavigationComponent}",
+                NavigationUIKtx      : "androidx.navigation:navigation-ui-ktx:${versions.NavigationComponent}",
+        ]
+
+        lifecycle = [
+                LiveData : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.LiveData}",
+                ViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.LiveData}",
+                Runtime  : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.LiveData}"
+        ]
+
+        http = [
+                Moshi                : "com.squareup.moshi:moshi:${versions.Moshi}",
+                MoshiConverterFactory: "com.squareup.retrofit2:converter-moshi:${versions.Retrofit}",
+                Retrofit             : "com.squareup.retrofit2:retrofit:${versions.Retrofit}",
+                LogginInterceptor    : "com.squareup.okhttp3:logging-interceptor:${versions.LogginInterceptor}"
+        ]
+
+        material = [
+                Material: "com.google.android.material:material:${versions.Material}"
+        ]
+
+        kapt = [
+                MoshiCodegen : "com.squareup.moshi:moshi-kotlin-codegen:${versions.Moshi}"
+        ]
+
+        unitTest = [
+                JUnit         : "junit:junit:${versions.JUnit}",
+                CoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.Coroutines}",
+                Mockk         : "io.mockk:mockk:${versions.Mockk}"
+        ]
+
+        androidTest = [
+                JUnitExt      : "junit:junit:${versions.JUnitExt}",
+                EspressoCore  : "androidx.test.espresso:espresso-core:${versions.EspressoCore}",
+                Navigation    : "androidx.navigation:navigation-testing:${versions.NavigationComponent}",
+                AndroidJUnit4 : "androidx.test.ext:junit-ktx:${versions.AndroidJUnit4}",
+                CoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.Coroutines}",
+                Mockk         : "io.mockk:mockk-android:${versions.Mockk}"
+        ]
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
