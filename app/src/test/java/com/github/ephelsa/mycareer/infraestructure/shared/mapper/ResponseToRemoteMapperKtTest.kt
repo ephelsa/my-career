@@ -4,15 +4,24 @@ import com.github.ephelsa.mycareer.TestSuiteSimple
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.StatusRemote
 import com.github.ephelsa.mycareer.domain.shared.WrappedRemote
-import com.github.ephelsa.mycareer.infraestructure.shared.remote.GsonBuild.moshi
+import com.github.ephelsa.mycareer.infraestructure.shared.remote.GsonBuild
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.ErrorResponseJSON
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.StatusResponseJSON
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.WrappedListResponseJSON
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.WrappedResponseJSON
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ResponseToRemoteMapperKtTest {
+
+    private data class SomethingRemote(val name: String)
+    private data class SomethingJson(
+        @SerializedName("name") val name: String
+    ) : DomainMappable<SomethingRemote> {
+        override fun toDomain() = SomethingRemote(name)
+    }
 
     @Test
     fun `ErrorResponseJSON json parser`() {
@@ -23,7 +32,7 @@ class ResponseToRemoteMapperKtTest {
             }
         """.trimIndent()
 
-        val got = moshi.adapter(ErrorResponseJSON::class.java).fromJson(raw)
+        val got = GsonBuild.gson.fromJson(raw, ErrorResponseJSON::class.java)
         val want = ErrorResponseJSON("Something went wrong", "Oh, dude...")
 
         assertEquals(want, got)
@@ -66,12 +75,43 @@ class ResponseToRemoteMapperKtTest {
     }
 
     @Test
-    fun `toDomain WrappedResponseJSON`() {
-        data class SomethingRemote(val name: String)
-        data class SomethingJson(val name: String) : DomainMappable<SomethingRemote> {
-            override fun toDomain() = SomethingRemote(name)
-        }
+    fun `WrappedResponseJSON json parser`() {
+        val type = object : TypeToken<WrappedResponseJSON<SomethingRemote, SomethingJson>>() {}.type
 
+        val tests = listOf(
+            TestSuiteSimple(
+                "with result and success",
+                GsonBuild.gson.fromJson(
+                    """{ "status": "success", "result": { "name": "leonardo" } }""",
+                    type
+                ),
+                WrappedResponseJSON(
+                    StatusResponseJSON.Success,
+                    result = SomethingJson("leonardo"),
+                    null
+                )
+            ),
+            TestSuiteSimple(
+                "with result and error",
+                GsonBuild.gson.fromJson(
+                    """{ "status": "error", "error": { "message": "Bad news", "details": "Oh god.." } }""",
+                    type
+                ),
+                WrappedResponseJSON(
+                    StatusResponseJSON.Error,
+                    result = null,
+                    error = ErrorResponseJSON("Bad news", "Oh god..")
+                )
+            )
+        )
+
+        for (tt in tests) {
+            assertEquals(tt.description, tt.want, tt.got)
+        }
+    }
+
+    @Test
+    fun `toDomain WrappedResponseJSON`() {
         val tests = listOf(
             TestSuiteSimple(
                 "result string",
@@ -103,12 +143,42 @@ class ResponseToRemoteMapperKtTest {
     }
 
     @Test
-    fun `toDomain WrappedListResponseJSON`() {
-        data class SomethingRemote(val name: String)
-        data class SomethingJson(val name: String) : DomainMappable<SomethingRemote> {
-            override fun toDomain() = SomethingRemote(name)
-        }
+    fun `WrappedListResponseJSON json parser`() {
+        val type = object : TypeToken<WrappedListResponseJSON<SomethingRemote, SomethingJson>>() {}.type
+        val tests = listOf(
+            TestSuiteSimple(
+                "with result and success",
+                GsonBuild.gson.fromJson(
+                    """{ "status": "success", "result": [ { "name": "leonardo" }, { "name": "karen" } ] }""",
+                    type
+                ),
+                WrappedListResponseJSON(
+                    StatusResponseJSON.Success,
+                    result = listOf(SomethingJson("leonardo"), SomethingJson("karen")),
+                    null
+                )
+            ),
+            TestSuiteSimple(
+                "with result and error",
+                GsonBuild.gson.fromJson(
+                    """{ "status": "error", "error": { "message": "Bad news", "details": "Oh god.." } }""",
+                    type
+                ),
+                WrappedListResponseJSON(
+                    StatusResponseJSON.Error,
+                    result = null,
+                    error = ErrorResponseJSON("Bad news", "Oh god..")
+                )
+            )
+        )
 
+        for (tt in tests) {
+            assertEquals(tt.description, tt.want, tt.got)
+        }
+    }
+
+    @Test
+    fun `toDomain WrappedListResponseJSON`() {
         val tests = listOf(
             TestSuiteSimple(
                 "result string",
