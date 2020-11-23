@@ -1,7 +1,6 @@
 package com.github.ephelsa.mycareer.ui.registry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentRegistryBinding
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
+import com.github.ephelsa.mycareer.ui.utils.tempToast
 
 class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickListener {
 
@@ -45,18 +45,22 @@ class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickLi
         }
     }
 
-    private val tempToast: (String) -> Unit = {
-        Log.v(TAG, it)
-        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-    }
-
     private fun handleCountries() {
         val name = CountryRemote::class.java.simpleName
         viewModel.countries.handleObservable(
-            onLoading = { tempToast(getString(R.string.temp_loading, name)) },
-            onSuccess = { tempToast(getString(R.string.temp_success, "${it.data}")) },
-            onError = { tempToast(getString(R.string.temp_error, "${it.error}")) },
-            onComplete = { tempToast(getString(R.string.temp_complete, name)) }
+            onLoading = { requireContext().tempToast(getString(R.string.temp_loading, name), TAG) },
+            onSuccess = {
+                requireContext().tempToast(
+                    getString(R.string.temp_success, "${it.data}"),
+                    TAG
+                )
+            },
+            onError = {
+                requireContext().tempToast(
+                    getString(R.string.temp_error, "${it.error}"),
+                    TAG
+                )
+            }
         )
     }
 

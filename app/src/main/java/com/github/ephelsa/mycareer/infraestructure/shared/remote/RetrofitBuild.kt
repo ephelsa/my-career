@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 
 object RetrofitBuild {
     val retrofit: Retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiBuild.moshiConverterFactory)
+        .addConverterFactory(GsonBuild.gsonConverterFactory)
         .baseUrl(BuildConfig.API_URL)
         .client(OkHttpClientBuild.okHttpClient)
         .build()

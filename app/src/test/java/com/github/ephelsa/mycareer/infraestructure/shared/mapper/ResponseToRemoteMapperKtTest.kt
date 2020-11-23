@@ -4,7 +4,7 @@ import com.github.ephelsa.mycareer.TestSuiteSimple
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.StatusRemote
 import com.github.ephelsa.mycareer.domain.shared.WrappedRemote
-import com.github.ephelsa.mycareer.infraestructure.shared.remote.MoshiBuild.moshi
+import com.github.ephelsa.mycareer.infraestructure.shared.remote.GsonBuild.moshi
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.ErrorResponseJSON
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.StatusResponseJSON
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.WrappedListResponseJSON

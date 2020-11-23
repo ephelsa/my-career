@@ -32,7 +32,7 @@ allprojects {
             NavigationComponent: '2.3.1',
             LiveData           : '2.2.0',
 
-            Moshi              : '1.11.0',
+            Gson               : '2.8.6',
             Retrofit           : '2.9.0',
             LogginInterceptor  : '4.9.0',
 
@@ -66,18 +66,14 @@ allprojects {
         ]
 
         http = [
-                Moshi                : "com.squareup.moshi:moshi:${versions.Moshi}",
-                MoshiConverterFactory: "com.squareup.retrofit2:converter-moshi:${versions.Retrofit}",
-                Retrofit             : "com.squareup.retrofit2:retrofit:${versions.Retrofit}",
-                LogginInterceptor    : "com.squareup.okhttp3:logging-interceptor:${versions.LogginInterceptor}"
+                Gson             : "com.google.code.gson:gson:${versions.Gson}",
+                GsonConverter    : "com.squareup.retrofit2:converter-gson:${versions.Retrofit}",
+                Retrofit         : "com.squareup.retrofit2:retrofit:${versions.Retrofit}",
+                LogginInterceptor: "com.squareup.okhttp3:logging-interceptor:${versions.LogginInterceptor}"
         ]
 
         material = [
                 Material: "com.google.android.material:material:${versions.Material}"
-        ]
-
-        kapt = [
-                MoshiCodegen : "com.squareup.moshi:moshi-kotlin-codegen:${versions.Moshi}"
         ]
 
         unitTest = [

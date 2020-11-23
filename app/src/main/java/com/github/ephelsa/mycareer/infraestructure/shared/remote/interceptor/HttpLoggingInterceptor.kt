@@ -4,6 +4,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 object HttpLoggingInterceptor {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+        level = HttpLoggingInterceptor.Level.BODY
     }
 }

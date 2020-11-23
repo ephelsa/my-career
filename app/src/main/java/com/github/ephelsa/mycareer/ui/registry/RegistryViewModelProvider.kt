@@ -5,11 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.github.ephelsa.mycareer.data.auth.AuthRepository
 import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.infraestructure.auth.remote.AuthRemoteRepository
-import com.github.ephelsa.mycareer.infraestructure.auth.remote.AuthService
 import com.github.ephelsa.mycareer.infraestructure.location.remote.LocationRemoteRepository
-import com.github.ephelsa.mycareer.infraestructure.location.remote.LocationService
 import com.github.ephelsa.mycareer.infraestructure.shared.remote.RetrofitBuild
-import com.github.ephelsa.mycareer.infraestructure.shared.remote.json.WrapperRemoteHandler
 import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
 import com.github.ephelsa.mycareer.usecase.location.CountriesUseCase
 import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
@@ -21,13 +18,10 @@ import retrofit2.create
 class RegistryViewModelProvider : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val authService = RetrofitBuild.retrofit.create<AuthService>()
-        val authRemoteRepository = AuthRemoteRepository(WrapperRemoteHandler, authService)
+        val authRemoteRepository = AuthRemoteRepository(RetrofitBuild.retrofit.create())
         val authRepository = AuthRepository(authRemoteRepository)
 
-        val locationService = RetrofitBuild.retrofit.create<LocationService>()
-        val locationRemoteRepository =
-            LocationRemoteRepository(WrapperRemoteHandler, locationService)
+        val locationRemoteRepository = LocationRemoteRepository(RetrofitBuild.retrofit.create())
         val locationRepository = LocationRepository(locationRemoteRepository)
 
         return modelClass.getConstructor(

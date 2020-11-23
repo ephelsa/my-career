@@ -10,4 +10,9 @@ interface AuthService {
     suspend fun registry(
         @Body registryJSON: RegistryJSON,
     ): WrappedResponseJSON<AuthCredentialRemote, AuthCredentialJSON>
+
+    @POST("auth/login")
+    suspend fun login(
+        @Body authCredentialJSON: AuthCredentialJSON
+    ): WrappedResponseJSON<AuthCredentialRemote, AuthCredentialJSON>
 }

@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRemoteDataSource {
     fun newUser(registryRemote: RegistryRemote): Flow<ResourceRemote<AuthCredentialRemote>>
+
+    fun login(authCredentialRemote: AuthCredentialRemote): Flow<ResourceRemote<AuthCredentialRemote>>
 }

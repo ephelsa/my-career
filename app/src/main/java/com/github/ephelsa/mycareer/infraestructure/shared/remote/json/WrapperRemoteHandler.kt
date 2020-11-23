@@ -5,7 +5,7 @@ import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.domain.shared.StatusRemote
 import com.github.ephelsa.mycareer.domain.shared.WrappedRemote
 import com.github.ephelsa.mycareer.infraestructure.shared.mapper.toDomain
-import com.github.ephelsa.mycareer.infraestructure.shared.remote.MoshiBuild
+import com.github.ephelsa.mycareer.infraestructure.shared.remote.GsonBuild.gson
 import retrofit2.HttpException
 
 object WrapperRemoteHandler {
@@ -26,9 +26,10 @@ object WrapperRemoteHandler {
 
     private fun <T : Any> parseHttpException(e: HttpException): ResourceRemote.Error<T> {
         return try {
-            val data = e.response()?.errorBody()!!.let {
-                MoshiBuild.moshi.adapter(WrappedResponseJSON::class.java).fromJson(it.string())
-            }
+            val body = e.response()!!.errorBody()!!.string()
+            val data = gson
+                .fromJson<WrapperResponseSimplyJSON<T>>(body, WrapperResponseSimplyJSON::class.java)
+
             ResourceRemote.Error<T>(
                 status = data!!.status.toDomain(),
                 error = data.error!!.toDomain()

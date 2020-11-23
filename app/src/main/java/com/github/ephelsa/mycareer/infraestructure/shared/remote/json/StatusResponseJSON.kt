@@ -1,11 +1,12 @@
 package com.github.ephelsa.mycareer.infraestructure.shared.remote.json
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+
 
 enum class StatusResponseJSON {
-    @Json(name = "success")
+    @SerializedName("success")
     Success,
 
-    @Json(name = "error")
+    @SerializedName("error")
     Error,
 }

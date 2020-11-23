@@ -11,15 +11,27 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AuthRemoteRepository(
-    private val wrapperRemoteHandler: WrapperRemoteHandler,
     private val authService: AuthService,
 ) : AuthRemoteDataSource {
+    private val wrapperRemoteHandler = WrapperRemoteHandler
 
     override fun newUser(registryRemote: RegistryRemote): Flow<ResourceRemote<AuthCredentialRemote>> =
         flow {
+            emit(ResourceRemote.Loading())
             try {
-                val response = authService.registry(registryRemote.toDelivery())
-                emit(wrapperRemoteHandler.handleSuccess(response.toDomain()))
+                val responseJSON = authService.registry(registryRemote.toDelivery())
+                emit(wrapperRemoteHandler.handleSuccess(responseJSON.toDomain()))
+            } catch (e: Exception) {
+                emit(wrapperRemoteHandler.handleError<AuthCredentialRemote>(e))
+            }
+        }
+
+    override fun login(authCredentialRemote: AuthCredentialRemote): Flow<ResourceRemote<AuthCredentialRemote>> =
+        flow {
+            emit(ResourceRemote.Loading())
+            try {
+                val responseJSON = authService.login(authCredentialRemote.toDelivery())
+                emit(wrapperRemoteHandler.handleSuccess(responseJSON.toDomain()))
             } catch (e: Exception) {
                 emit(wrapperRemoteHandler.handleError<AuthCredentialRemote>(e))
             }

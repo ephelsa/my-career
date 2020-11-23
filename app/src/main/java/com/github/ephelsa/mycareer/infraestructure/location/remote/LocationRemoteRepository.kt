@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class LocationRemoteRepository(
-    private val wrapperRemoteHandler: WrapperRemoteHandler,
     private val locationService: LocationService
 ) : LocationRemoteDataSource {
+
+    private val wrapperRemoteHandler = WrapperRemoteHandler
+
     override fun countries(): Flow<ResourceRemote<List<CountryRemote>>> = flow {
         emit(ResourceRemote.Loading())
         try {
