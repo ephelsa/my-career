@@ -319,6 +319,7 @@
                     android:layout_marginEnd="@dimen/spacing_tiny"
                     android:layout_weight="1"
                     android:hint="@string/hint_pass"
+                    app:counterEnabled="true"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/blue_jeans">
 
@@ -337,6 +338,7 @@
                     android:layout_marginStart="@dimen/spacing_tiny"
                     android:layout_weight="1"
                     android:hint="@string/hint_pass_confirm"
+                    app:counterEnabled="true"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/blue_jeans">
 

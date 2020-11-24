@@ -45,10 +45,20 @@
     <string name="error_document_type">Ingresa un tipo de documento válido</string>
     <string name="error_study_level">Ingresa un nivel educativo válido</string>
     <string name="error_institution_type">Ingresa un tipo de instutición válido</string>
+    <string name="error_first_name">Nombre inválido o vacío</string>
+    <string name="error_second_name">Nombre inválido</string>
+    <string name="error_first_surname">Primer apellido inválido o vacío</string>
+    <string name="error_second_surname">Segundo apellido inválido o vacío</string>
+    <string name="error_document">Documento inválido o vacío</string>
+    <string name="error_institution_name">Nombre de la institución inválido o vacío</string>
+    <string name="error_password_match_length">Las contraseñas deben de ser iguales y tener un mínimo de %d caracteres</string>
 
     <!-- loading messages -->
     <string name="loading_countries">Cargando paises</string>
     <string name="loading_document_types">Cargando tipos de documentos</string>
     <string name="loading_study_levels">Cargando niveles educativos</string>
     <string name="loading_institution_types">Cargando tipos de instituciones</string>
+
+    <!-- success messages -->
+    <string name="success_registry">¡Registro exitoso! Mira Revisa tu correo: %s</string>
 </resources>

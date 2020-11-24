@@ -25,14 +25,14 @@ class LoginViewModel @ViewModelInject constructor(
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val isPasswordValid = password.length >= minPasswordSize
 
-        _ui.value = UI.DisplayEmailError(!isEmailValid)
-        _ui.value = UI.DisplayPasswordError(!isPasswordValid)
+        _ui.value = UI.InvalidEmail(!isEmailValid)
+        _ui.value = UI.InvalidPassword(!isPasswordValid)
         _ui.value = UI.IsLoginEnabled(isEmailValid && isPasswordValid)
     }
 
     sealed class UI {
         data class IsLoginEnabled(val isEnabled: Boolean) : UI()
-        data class DisplayPasswordError(val display: Boolean) : UI()
-        data class DisplayEmailError(val display: Boolean) : UI()
+        data class InvalidPassword(val display: Boolean) : UI()
+        data class InvalidEmail(val display: Boolean) : UI()
     }
 }

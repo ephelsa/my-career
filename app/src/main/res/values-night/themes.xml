@@ -43,6 +43,10 @@
         <item name="android:textColor">@color/red_700</item>
     </style>
 
+    <style name="Text.Title.Success">
+        <item name="android:textColor">@color/green_700</item>
+    </style>
+
     <!-- Buttons -->
     <style name="Button" parent="Widget.MaterialComponents.Button">
         <item name="android:drawableTint">@color/black</item>

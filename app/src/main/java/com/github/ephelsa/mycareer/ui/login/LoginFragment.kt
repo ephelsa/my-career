@@ -12,7 +12,7 @@ import com.github.ephelsa.mycareer.databinding.FragmentLoginBinding
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.ui.login.LoginViewModel.UI
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
-import com.github.ephelsa.mycareer.ui.utils.isErrorEnabled
+import com.github.ephelsa.mycareer.ui.utils.hasError
 import com.github.ephelsa.mycareer.ui.utils.tempToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,14 +67,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
     private fun uiObserver(ui: UI) {
         when (ui) {
             is UI.IsLoginEnabled -> binding.loginButton.isEnabled = ui.isEnabled
-            is UI.DisplayPasswordError -> {
-                binding.passwordContainer.isErrorEnabled(
-                    ui.display,
-                    getString(R.string.error_password_length, MIN_PASSWORD_SIZE)
-                )
+            is UI.InvalidPassword -> {
+                binding.passwordContainer
+                    .hasError(
+                        ui.display,
+                        getString(R.string.error_password_length, MIN_PASSWORD_SIZE)
+                    )
             }
-            is UI.DisplayEmailError -> {
-                binding.emailContainer.isErrorEnabled(ui.display, getString(R.string.error_email))
+            is UI.InvalidEmail -> {
+                binding.emailContainer
+                    .hasError(ui.display, getString(R.string.error_email))
             }
         }
     }

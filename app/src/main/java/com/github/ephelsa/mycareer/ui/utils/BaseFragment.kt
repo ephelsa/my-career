@@ -11,14 +11,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
+import com.github.ephelsa.mycareer.ui.dialog.DialogListener
 import com.github.ephelsa.mycareer.ui.dialog.ErrorDialog
 import com.github.ephelsa.mycareer.ui.dialog.LoaderDialog
+import com.github.ephelsa.mycareer.ui.dialog.SuccessDialog
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     private var _binding: Binding? = null
     protected val binding: Binding get() = _binding!!
 
     private val loaderDialog = LoaderDialog()
+    private val successDialog = SuccessDialog()
     private val errorDialog = ErrorDialog()
 
     companion object {
@@ -41,6 +44,14 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         loaderDialog.dismiss()
     }
 
+    protected fun displaySuccess(title: String, dialogListener: DialogListener? = null) {
+        successDialog.apply {
+            successTitle = title
+            this.dialogListener = dialogListener
+            show(this@BaseFragment.parentFragmentManager, TAG)
+        }
+    }
+
     protected fun displayError(errorRemote: ErrorRemote) {
         errorDialog.apply {
             errorTitle = errorRemote.message
@@ -56,7 +67,8 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         onComplete: (() -> Unit)? = null,
 
         // Optionals
-        enableDefaultLoader: Boolean = true
+        enableDefaultLoader: Boolean = true,
+        enableDefaultError: Boolean = true
     ) {
         this.observe(viewLifecycleOwner) {
             when (it) {
@@ -73,7 +85,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
                     if (enableDefaultLoader) hideLoader()
                     if (onError != null) onError(it)
                     if (onComplete != null) onComplete()
-                    displayError(it.error)
+                    if (enableDefaultError) displayError(it.error)
                 }
                 is ResourceRemote.Complete -> if (onComplete != null) onComplete()
             }

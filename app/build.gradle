@@ -43,7 +43,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -67,7 +67,7 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            buildConfigField("String", "API_URL", "\"http://192.168.1.8:3000/\"")
+            buildConfigField("String", "API_URL", "\"http://192.168.1.1:3000/\"")
         }
     }
     compileOptions {
