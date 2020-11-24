@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.usecase
 
-import com.github.ephelsa.mycareer.delivery.auth.AuthRepository
+import com.github.ephelsa.mycareer.data.auth.AuthRepository
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.domain.auth.RegistryRemote
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote

@@ -12,12 +12,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentRegistryBinding
+import com.github.ephelsa.mycareer.domain.documenttype.DocumentTypeRemote
+import com.github.ephelsa.mycareer.domain.institutiontype.InstitutionTypeRemote
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.domain.location.DepartmentRemote
 import com.github.ephelsa.mycareer.domain.location.MunicipalityRemote
+import com.github.ephelsa.mycareer.domain.studylevel.StudyLevelRemote
 import com.github.ephelsa.mycareer.ui.registry.RegistryViewModel.UI
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.isErrorEnabled
+import com.github.ephelsa.mycareer.ui.utils.isLoading
 import com.github.ephelsa.mycareer.ui.utils.match
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +31,10 @@ class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickLi
     private val viewModel: RegistryViewModel by viewModels()
 
     private val autoListStyle = android.R.layout.simple_dropdown_item_1line
+
+    private lateinit var institutionTypes: List<InstitutionTypeRemote>
+    private lateinit var studyLevels: List<StudyLevelRemote>
+    private lateinit var documentTypes: List<DocumentTypeRemote>
     private lateinit var countries: List<CountryRemote>
     private lateinit var departments: List<DepartmentRemote>
     private lateinit var municipalities: List<MunicipalityRemote>
@@ -47,6 +55,9 @@ class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickLi
         bindClickListener()
 
         loadCountries()
+        loadDocumentTypes()
+        loadStudyLevels()
+        loadInstitutionTypes()
         viewModel.ui.observe(viewLifecycleOwner, Observer(::uiObserver))
     }
 
@@ -58,14 +69,99 @@ class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickLi
         }
     }
 
+    private fun loadInstitutionTypes() {
+        viewModel.institutionTypes.handleObservable(
+            enableDefaultLoader = false,
+            onLoading = {
+                binding.institutionTypeContainer
+                    .isLoading(true, getString(R.string.loading_institution_types))
+            },
+            onSuccess = {
+                institutionTypes = it.data
+                val adapter = ArrayAdapter(requireContext(), autoListStyle, institutionTypes)
+                binding.institutionTypeAuto.setAdapter(adapter)
+                validateInstitutionType()
+            },
+            onComplete = {
+                binding.institutionTypeContainer.isLoading(false)
+            }
+        )
+    }
+
+    private fun validateInstitutionType() {
+        val auto = binding.institutionTypeAuto
+        auto.addTextChangedListener { e ->
+            viewModel.validateInstitutionType(institutionTypes.match(e.toString()) { it.name })
+        }
+    }
+
+    private fun loadStudyLevels() {
+        viewModel.studyLevels.handleObservable(
+            enableDefaultLoader = false,
+            onLoading = {
+                binding.studyLevelContainer
+                    .isLoading(true, getString(R.string.loading_study_levels))
+            },
+            onSuccess = {
+                studyLevels = it.data
+                val adapter = ArrayAdapter(requireContext(), autoListStyle, studyLevels)
+                binding.studyLevelAuto.setAdapter(adapter)
+                validateStudyLevel()
+            },
+            onComplete = {
+                binding.studyLevelContainer.isLoading(false)
+            }
+        )
+    }
+
+    private fun validateStudyLevel() {
+        val auto = binding.studyLevelAuto
+        auto.addTextChangedListener { e ->
+            viewModel.validateStudyLevel(studyLevels.match(e.toString()) { it.name })
+        }
+    }
+
+    private fun loadDocumentTypes() {
+        viewModel.documentTypes.handleObservable(
+            enableDefaultLoader = false,
+            onLoading = {
+                binding.documentTypeContainer
+                    .isLoading(true, getString(R.string.loading_document_types))
+            },
+            onSuccess = {
+                documentTypes = it.data
+                val adapter = ArrayAdapter(requireContext(), autoListStyle, documentTypes)
+                binding.documentTypeAuto.setAdapter(adapter)
+                validateDocumentType()
+            },
+            onComplete = {
+                binding.documentTypeContainer.isLoading(false)
+            }
+        )
+    }
+
+    private fun validateDocumentType() {
+        val auto = binding.documentTypeAuto
+        auto.addTextChangedListener { e ->
+            viewModel.validateDocumentType(documentTypes.match(e.toString()) { it.name })
+        }
+    }
+
     private fun loadCountries() {
         viewModel.countries.handleObservable(
+            enableDefaultLoader = false,
+            onLoading = {
+                binding.countryContainer.isLoading(true, getString(R.string.loading_countries))
+            },
             onSuccess = {
                 countries = it.data
                 val adapter = ArrayAdapter(requireContext(), autoListStyle, countries)
                 binding.countryAuto.setAdapter(adapter)
                 validateCountry()
                 loadDepartmentsByCountry()
+            },
+            onComplete = {
+                binding.countryContainer.isLoading(false)
             }
         )
     }
@@ -135,6 +231,18 @@ class RegistryFragment : BaseFragment<FragmentRegistryBinding>(), View.OnClickLi
             is UI.InvalidCountry -> handleInvalidCountry(ui.isInvalid)
             is UI.InvalidDepartment -> handleInvalidDepartment(ui.isInvalid)
             is UI.InvalidMunicipality -> handleInvalidMunicipality(ui.isInvalid)
+            is UI.InvalidDocumentType -> {
+                binding.documentTypeContainer
+                    .isErrorEnabled(ui.isInvalid, getString(R.string.error_document_type))
+            }
+            is UI.InvalidStudyLevel -> {
+                binding.studyLevelContainer
+                    .isErrorEnabled(ui.isInvalid, getString(R.string.error_study_level))
+            }
+            is UI.InstitutionType -> {
+                binding.institutionTypeContainer
+                    .isErrorEnabled(ui.isInvalid, getString(R.string.error_institution_type))
+            }
         }
     }
 

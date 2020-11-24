@@ -42,4 +42,13 @@
     <string name="error_country">Ingresa un país válido</string>
     <string name="error_department">Ingresa un departamento o país válidop</string>
     <string name="error_municipality">Ingresa un municipio de la lista</string>
+    <string name="error_document_type">Ingresa un tipo de documento válido</string>
+    <string name="error_study_level">Ingresa un nivel educativo válido</string>
+    <string name="error_institution_type">Ingresa un tipo de instutición válido</string>
+
+    <!-- loading messages -->
+    <string name="loading_countries">Cargando paises</string>
+    <string name="loading_document_types">Cargando tipos de documentos</string>
+    <string name="loading_study_levels">Cargando niveles educativos</string>
+    <string name="loading_institution_types">Cargando tipos de instituciones</string>
 </resources>

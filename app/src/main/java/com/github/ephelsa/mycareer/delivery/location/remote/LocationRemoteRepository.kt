@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.delivery.location.remote
 
-import com.github.ephelsa.mycareer.delivery.location.LocationRemoteDataSource
+import com.github.ephelsa.mycareer.data.location.LocationRemoteDataSource
 import com.github.ephelsa.mycareer.delivery.shared.mapper.toDomain
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler
 import com.github.ephelsa.mycareer.domain.location.CountryRemote

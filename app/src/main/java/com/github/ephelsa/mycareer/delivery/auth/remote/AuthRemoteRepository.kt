@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.delivery.auth.remote
 
-import com.github.ephelsa.mycareer.delivery.auth.AuthRemoteDataSource
+import com.github.ephelsa.mycareer.data.auth.AuthRemoteDataSource
 import com.github.ephelsa.mycareer.delivery.auth.mapper.toDelivery
 import com.github.ephelsa.mycareer.delivery.shared.mapper.toDomain
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler

@@ -33,7 +33,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun displayLoader() {
-        if (!loaderDialog.isAdded) loaderDialog.show(parentFragmentManager, TAG)
+        loaderDialog.show(parentFragmentManager, TAG)
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
@@ -53,24 +53,27 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         onLoading: ((ResourceRemote.Loading<T>) -> Unit)? = null,
         onSuccess: ((ResourceRemote.Success<T>) -> Unit)? = null,
         onError: ((ResourceRemote.Error<T>) -> Unit)? = null,
-        onComplete: (() -> Unit)? = null
+        onComplete: (() -> Unit)? = null,
+
+        // Optionals
+        enableDefaultLoader: Boolean = true
     ) {
         this.observe(viewLifecycleOwner) {
             when (it) {
                 is ResourceRemote.Loading -> {
-                    displayLoader()
+                    if (enableDefaultLoader) displayLoader()
                     if (onLoading != null) onLoading(it)
                 }
                 is ResourceRemote.Success -> {
+                    if (enableDefaultLoader) hideLoader()
                     if (onSuccess != null) onSuccess(it)
                     if (onComplete != null) onComplete()
-                    hideLoader()
                 }
                 is ResourceRemote.Error -> {
+                    if (enableDefaultLoader) hideLoader()
                     if (onError != null) onError(it)
                     if (onComplete != null) onComplete()
                     displayError(it.error)
-                    hideLoader()
                 }
                 is ResourceRemote.Complete -> if (onComplete != null) onComplete()
             }

@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.auth
+package com.github.ephelsa.mycareer.data.auth
 
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.domain.auth.RegistryRemote

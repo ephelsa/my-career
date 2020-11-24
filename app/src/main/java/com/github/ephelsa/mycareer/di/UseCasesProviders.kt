@@ -1,12 +1,18 @@
 package com.github.ephelsa.mycareer.di
 
-import com.github.ephelsa.mycareer.delivery.auth.AuthRepository
-import com.github.ephelsa.mycareer.delivery.location.LocationRepository
+import com.github.ephelsa.mycareer.data.auth.AuthRepository
+import com.github.ephelsa.mycareer.data.documenttype.DocumentTypeRepository
+import com.github.ephelsa.mycareer.data.institutiontype.InstitutionTypeRepository
+import com.github.ephelsa.mycareer.data.location.LocationRepository
+import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
 import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
+import com.github.ephelsa.mycareer.usecase.documenttype.DocumentTypesUseCase
+import com.github.ephelsa.mycareer.usecase.institutiontype.InstitutionTypesUseCase
 import com.github.ephelsa.mycareer.usecase.location.CountriesUseCase
 import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
 import com.github.ephelsa.mycareer.usecase.location.MunicipalitiesByCountryAndDepartmentUseCase
+import com.github.ephelsa.mycareer.usecase.studylevel.StudyLevelsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +46,19 @@ object UseCasesProviders {
     fun provideMunicipalitiesByCountryAndDepartmentUseCase(
         locationRepository: LocationRepository
     ) = MunicipalitiesByCountryAndDepartmentUseCase(locationRepository)
+
+    @Provides
+    fun provideDocumentTypesUseCase(
+        documentTypeRepository: DocumentTypeRepository
+    ) = DocumentTypesUseCase(documentTypeRepository)
+
+    @Provides
+    fun provideInstitutionsTypesUseCase(
+        institutionTypeRepository: InstitutionTypeRepository
+    ) = InstitutionTypesUseCase(institutionTypeRepository)
+
+    @Provides
+    fun provideStudyLevelsUseCase(
+        studyLevelRepository: StudyLevelRepository
+    ) = StudyLevelsUseCase(studyLevelRepository)
 }

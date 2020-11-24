@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.usecase.location
 
-import com.github.ephelsa.mycareer.delivery.location.LocationRepository
+import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import kotlinx.coroutines.flow.Flow

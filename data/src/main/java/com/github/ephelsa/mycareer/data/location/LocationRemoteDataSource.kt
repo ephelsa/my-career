@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.location
+package com.github.ephelsa.mycareer.data.location
 
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.domain.location.DepartmentRemote
