@@ -1,6 +1,7 @@
 package com.github.ephelsa.mycareer.ui.utils
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,11 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun displayLoader() {
-        loaderDialog.show(parentFragmentManager, TAG)
+        try {
+            loaderDialog.show(parentFragmentManager, TAG)
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+        }
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
@@ -45,9 +50,12 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     }
 
     protected fun displaySuccess(dialogListener: DialogListener? = null) {
-        successDialog.apply {
-            this.dialogListener = dialogListener
-            show(this@BaseFragment.parentFragmentManager, TAG)
+        successDialog.dialogListener = dialogListener
+
+        try {
+            successDialog.show(parentFragmentManager, TAG)
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
         }
     }
 
@@ -56,7 +64,12 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         errorDialog.apply {
             errorTitle = errorRemote.message
             errorMessage = errorRemote.details
-            show(this@BaseFragment.parentFragmentManager, TAG)
+        }
+
+        try {
+            errorDialog.show(parentFragmentManager, TAG)
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
         }
     }
 
