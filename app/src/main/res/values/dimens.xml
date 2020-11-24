@@ -22,4 +22,10 @@
     <!-- border radius -->
     <dimen name="border_radius_normal">4dp</dimen>
 
+    <!-- specific sizes -->
+    <dimen name="specific_studying_width">200dp</dimen>
+    <dimen name="specific_studying_height">200dp</dimen>
+    <dimen name="specific_success_width">200dp</dimen>
+    <dimen name="specific_success_height">200dp</dimen>
+
 </resources>

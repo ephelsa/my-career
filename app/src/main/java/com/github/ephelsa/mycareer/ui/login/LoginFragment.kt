@@ -13,7 +13,6 @@ import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.ui.login.LoginViewModel.UI
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.hasError
-import com.github.ephelsa.mycareer.ui.utils.tempToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,7 +87,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
 
         viewModel.login(credentials).handleObservable(
             onSuccess = {
-                requireContext().tempToast(getString(R.string.temp_success, "${it.data}"), TAG)
+                displaySuccess()
             }
         )
     }

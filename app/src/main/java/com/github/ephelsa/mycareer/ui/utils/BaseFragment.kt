@@ -44,14 +44,14 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         loaderDialog.dismiss()
     }
 
-    protected fun displaySuccess(title: String, dialogListener: DialogListener? = null) {
+    protected fun displaySuccess(dialogListener: DialogListener? = null) {
         successDialog.apply {
-            successTitle = title
             this.dialogListener = dialogListener
             show(this@BaseFragment.parentFragmentManager, TAG)
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected fun displayError(errorRemote: ErrorRemote) {
         errorDialog.apply {
             errorTitle = errorRemote.message

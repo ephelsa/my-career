@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -322,7 +323,12 @@ class RegistryFragment :
         )
         viewModel.sendRegistry(reg).handleObservable(
             onSuccess = {
-                displaySuccess(getString(R.string.success_registry, it.data.email), this)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.success_registry, it.data.email),
+                    Toast.LENGTH_LONG
+                ).show()
+                displaySuccess(this)
             }
         )
     }

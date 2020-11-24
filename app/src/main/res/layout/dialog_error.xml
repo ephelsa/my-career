@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:elevation="@dimen/elevation_high"
     android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="@dimen/border_radius_normal">
 
     <RelativeLayout

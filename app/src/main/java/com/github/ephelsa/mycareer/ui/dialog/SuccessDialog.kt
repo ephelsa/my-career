@@ -19,7 +19,6 @@ class SuccessDialog(
 ) : DialogFragment(), View.OnClickListener, Animator.AnimatorListener {
 
     private lateinit var binding: DialogSuccessBinding
-    var successTitle: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +28,6 @@ class SuccessDialog(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         bindClickListener()
         bindLottieListener()
-        binView()
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -50,15 +48,6 @@ class SuccessDialog(
 
     private fun bindLottieListener() {
         binding.successLottie.addAnimatorListener(this)
-    }
-
-    private fun binView() {
-        binding.successTitle.text = successTitle ?: ""
-    }
-
-    override fun dismiss() {
-        binding.successTitle.text = ""
-        super.dismiss()
     }
 
     override fun onClick(v: View?) {

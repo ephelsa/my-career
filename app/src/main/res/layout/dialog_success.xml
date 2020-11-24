@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:elevation="@dimen/elevation_high"
     android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="@dimen/border_radius_normal">
 
     <RelativeLayout
@@ -26,24 +27,14 @@
             android:contentDescription="@string/content_description_close_button"
             android:src="@drawable/ic_baseline_close_24" />
 
-        <TextView
-            android:id="@+id/success_title"
-            style="@style/Text.Title.Success"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            android:layout_toStartOf="@id/close_button"
-            android:gravity="center" />
-
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/success_lottie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/success_title"
+            android:layout_width="@dimen/specific_success_width"
+            android:layout_height="@dimen/specific_success_height"
             android:layout_centerInParent="true"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
+            app:lottie_speed="2.5"
             app:lottie_rawRes="@raw/work_success_lottie" />
 
     </RelativeLayout>
