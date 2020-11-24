@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.ui.utils
 
-import java.util.*
+import java.util.Locale
 
 fun <T> List<T>.match(compare: String, contain: (T) -> String): T? {
     val pCompare = compare.toLowerCase(Locale.getDefault())
