@@ -19,7 +19,6 @@
             style="@style/IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:contentDescription="@string/content_description_back_button"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
@@ -36,7 +35,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/content_start"
         android:layout_marginTop="@dimen/content_top"
-        android:layout_marginEnd="@dimen/content_eEnd"
+        android:layout_marginEnd="@dimen/content_end"
         android:layout_marginBottom="@dimen/content_bottom"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -359,7 +358,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/content_start"
-        android:layout_marginEnd="@dimen/content_eEnd"
+        android:layout_marginEnd="@dimen/content_end"
         android:layout_marginBottom="@dimen/content_bottom"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

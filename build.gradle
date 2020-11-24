@@ -29,6 +29,7 @@ allprojects {
 
             AppCompat          : '1.2.0',
             Material           : '1.2.1',
+            Lottie             : '3.5.0',
             ContraintLayout    : '2.0.4',
             NavigationComponent: '2.3.1',
             LiveData           : '2.2.0',
@@ -78,7 +79,8 @@ allprojects {
         ]
 
         material = [
-                Material: "com.google.android.material:material:${versions.Material}"
+                Material: "com.google.android.material:material:${versions.Material}",
+                Lottie  : "com.airbnb.android:lottie:${versions.Lottie}"
         ]
 
         kapt = [

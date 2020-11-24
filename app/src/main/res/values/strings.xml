@@ -28,6 +28,7 @@
 
     <!-- content descriptions -->
     <string name="content_description_back_button">Regresar</string>
+    <string name="content_description_close_button">Cerrar</string>
 
     <!-- temporal resources -->
     <string name="temp_loading">Cargando %s</string>
@@ -35,4 +36,7 @@
     <string name="temp_error">Error %s</string>
     <string name="temp_complete">Completado %s</string>
 
+    <!-- errors -->
+    <string name="error_email">Correo inválido</string>
+    <string name="error_password_length">La contraseña tiene que tener al menos %d caracteres</string>
 </resources>

@@ -9,16 +9,44 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
+import com.github.ephelsa.mycareer.ui.dialog.ErrorDialog
+import com.github.ephelsa.mycareer.ui.dialog.LoaderDialog
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     private var _binding: Binding? = null
     protected val binding: Binding get() = _binding!!
 
+    private val loaderDialog = LoaderDialog()
+    private val errorDialog = ErrorDialog()
+
+    companion object {
+        private val TAG = BaseFragment::class.java.simpleName
+    }
+
     abstract fun initializeBinding(inflater: LayoutInflater, container: ViewGroup?): Binding
 
     protected fun navigate(direction: NavDirections) {
         findNavController().navigate(direction)
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun displayLoader() {
+        loaderDialog.show(parentFragmentManager, TAG)
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun hideLoader() {
+        loaderDialog.dismiss()
+    }
+
+    protected fun displayError(errorRemote: ErrorRemote) {
+        errorDialog.apply {
+            errorTitle = errorRemote.message
+            errorMessage = errorRemote.details
+            show(this@BaseFragment.parentFragmentManager, TAG)
+        }
     }
 
     protected fun <T : Any> LiveData<ResourceRemote<T>>.handleObservable(
@@ -30,15 +58,19 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         this.observe(viewLifecycleOwner) {
             when (it) {
                 is ResourceRemote.Loading -> {
+                    displayLoader()
                     if (onLoading != null) onLoading(it)
                 }
                 is ResourceRemote.Success -> {
                     if (onSuccess != null) onSuccess(it)
                     if (onComplete != null) onComplete()
+                    hideLoader()
                 }
                 is ResourceRemote.Error -> {
                     if (onError != null) onError(it)
                     if (onComplete != null) onComplete()
+                    displayError(it.error)
+                    hideLoader()
                 }
                 is ResourceRemote.Complete -> if (onComplete != null) onComplete()
             }
