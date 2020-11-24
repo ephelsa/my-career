@@ -181,7 +181,8 @@
                     android:id="@+id/country_auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textNoSuggestions" />
+                    android:inputType="textNoSuggestions"
+                    android:completionHint="@string/hint_country" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

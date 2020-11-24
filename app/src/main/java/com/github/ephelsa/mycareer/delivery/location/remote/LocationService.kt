@@ -11,12 +11,12 @@ interface LocationService {
     @GET("/location/country")
     suspend fun countries(): WrappedListResponseJSON<CountryRemote, CountryJSON>
 
-    @GET("/location/{countryCode}/department")
+    @GET("/location/country/{countryCode}/department")
     suspend fun departmentsByCountry(
         @Path("countryCode") countryCode: String
     ): WrappedListResponseJSON<DepartmentRemote, DepartmentJSON>
 
-    @GET("/location/{countryCode}/department/{departmentCode}/municipality")
+    @GET("/location/country/{countryCode}/department/{departmentCode}/municipality")
     suspend fun municipalitiesByCountryAndDepartment(
         @Path("countryCode") countryCode: String,
         @Path("departmentCode") departmentCode: String,

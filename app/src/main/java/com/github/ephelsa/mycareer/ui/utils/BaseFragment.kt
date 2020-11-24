@@ -33,7 +33,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun displayLoader() {
-        loaderDialog.show(parentFragmentManager, TAG)
+        if (!loaderDialog.isAdded) loaderDialog.show(parentFragmentManager, TAG)
     }
 
     @Suppress("MemberVisibilityCanBePrivate")

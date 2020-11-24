@@ -5,4 +5,8 @@ data class MunicipalityRemote(
     val departmentCode: String,
     val municipalityCode: String,
     val name: String
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}

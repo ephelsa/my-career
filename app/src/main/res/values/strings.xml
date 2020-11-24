@@ -39,4 +39,7 @@
     <!-- errors -->
     <string name="error_email">Correo inválido</string>
     <string name="error_password_length">La contraseña tiene que tener al menos %d caracteres</string>
+    <string name="error_country">Ingresa un país válido</string>
+    <string name="error_department">Ingresa un departamento o país válidop</string>
+    <string name="error_municipality">Ingresa un municipio de la lista</string>
 </resources>
