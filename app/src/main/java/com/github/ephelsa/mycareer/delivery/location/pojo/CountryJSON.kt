@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.location.remote
+package com.github.ephelsa.mycareer.delivery.location.pojo
 
 import com.github.ephelsa.mycareer.delivery.shared.mapper.DomainMappable
 import com.github.ephelsa.mycareer.domain.location.CountryRemote

@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.institutiontype.remote
+package com.github.ephelsa.mycareer.delivery.institutiontype.pojo
 
 import com.github.ephelsa.mycareer.delivery.shared.mapper.DomainMappable
 import com.github.ephelsa.mycareer.domain.institutiontype.InstitutionTypeRemote

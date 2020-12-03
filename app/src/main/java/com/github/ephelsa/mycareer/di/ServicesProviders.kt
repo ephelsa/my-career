@@ -5,6 +5,7 @@ import com.github.ephelsa.mycareer.delivery.documenttype.remote.DocumentTypeServ
 import com.github.ephelsa.mycareer.delivery.institutiontype.remote.InstitutionTypeService
 import com.github.ephelsa.mycareer.delivery.location.remote.LocationService
 import com.github.ephelsa.mycareer.delivery.studylevel.remote.StudyLevelService
+import com.github.ephelsa.mycareer.delivery.survey.remote.SurveyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +35,8 @@ object ServicesProviders {
     @Provides
     fun provideStudyLevelService(retrofit: Retrofit): StudyLevelService =
         retrofit.create(StudyLevelService::class.java)
+
+    @Provides
+    fun provideSurveyService(retrofit: Retrofit): SurveyService =
+        retrofit.create(SurveyService::class.java)
 }

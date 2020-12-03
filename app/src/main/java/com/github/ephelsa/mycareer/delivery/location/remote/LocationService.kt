@@ -1,5 +1,8 @@
 package com.github.ephelsa.mycareer.delivery.location.remote
 
+import com.github.ephelsa.mycareer.delivery.location.pojo.CountryJSON
+import com.github.ephelsa.mycareer.delivery.location.pojo.DepartmentJSON
+import com.github.ephelsa.mycareer.delivery.location.pojo.MunicipalityJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrappedListResponseJSON
 import com.github.ephelsa.mycareer.domain.location.CountryRemote
 import com.github.ephelsa.mycareer.domain.location.DepartmentRemote

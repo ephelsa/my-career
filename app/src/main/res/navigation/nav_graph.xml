@@ -18,10 +18,19 @@
             app:popExitAnim="@anim/fragment_fade_exit"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/surveys_fragment"
+            app:destination="@id/surveysFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/registryFragment"
         android:name="com.github.ephelsa.mycareer.ui.registry.RegistryFragment"
         android:label="fragment_registry"
         tools:layout="@layout/fragment_registry" />
+    <fragment
+        android:id="@+id/surveysFragment"
+        android:name="com.github.ephelsa.mycareer.ui.surveys.SurveysFragment"
+        android:label="SurveysFragment" />
 </navigation>

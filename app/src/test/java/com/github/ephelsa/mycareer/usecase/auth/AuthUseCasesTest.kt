@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.usecase
+package com.github.ephelsa.mycareer.usecase.auth
 
 import com.github.ephelsa.mycareer.data.auth.AuthRepository
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
@@ -6,8 +6,6 @@ import com.github.ephelsa.mycareer.domain.auth.RegistryRemote
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.domain.shared.StatusRemote
-import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
-import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -131,7 +129,7 @@ class AuthUseCasesTest {
 
         runBlockingTest(testDispatcher) {
             useCase(credentials).collect {
-                when(it) {
+                when (it) {
                     is ResourceRemote.Loading -> assert(true)
                     is ResourceRemote.Success -> assert(false)
                     is ResourceRemote.Error -> {

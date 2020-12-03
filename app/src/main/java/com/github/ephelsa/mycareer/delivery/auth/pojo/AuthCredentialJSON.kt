@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.auth.remote
+package com.github.ephelsa.mycareer.delivery.auth.pojo
 
 import com.github.ephelsa.mycareer.delivery.shared.mapper.DomainMappable
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote

@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentLoginBinding
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
+import com.github.ephelsa.mycareer.ui.dialog.DialogListener
 import com.github.ephelsa.mycareer.ui.login.LoginViewModel.UI
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.hasError
@@ -85,10 +87,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
             AuthCredentialRemote(emailInput.text?.toString(), passwordInput.text?.toString())
         }
 
-        viewModel.login(credentials).handleObservable(
-            onSuccess = {
-                displaySuccess()
+        val successListener = object : DialogListener {
+            override fun onClose(dialogFragment: DialogFragment) {
+                navigate(directions.surveysFragment())
             }
+        }
+
+        viewModel.login(credentials).handleObservable(
+            onSuccess = { displaySuccess(successListener) }
         )
     }
 

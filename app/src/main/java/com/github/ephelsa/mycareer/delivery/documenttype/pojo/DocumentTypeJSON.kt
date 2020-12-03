@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.documenttype.remote
+package com.github.ephelsa.mycareer.delivery.documenttype.pojo
 
 import com.github.ephelsa.mycareer.delivery.shared.mapper.DomainMappable
 import com.github.ephelsa.mycareer.domain.documenttype.DocumentTypeRemote

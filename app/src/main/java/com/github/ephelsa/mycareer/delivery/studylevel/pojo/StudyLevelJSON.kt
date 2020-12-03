@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer.delivery.studylevel.remote
+package com.github.ephelsa.mycareer.delivery.studylevel.pojo
 
 import com.github.ephelsa.mycareer.delivery.shared.mapper.DomainMappable
 import com.github.ephelsa.mycareer.domain.studylevel.StudyLevelRemote

@@ -32,7 +32,11 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     abstract fun initializeBinding(inflater: LayoutInflater, container: ViewGroup?): Binding
 
     protected fun navigate(direction: NavDirections) {
-        findNavController().navigate(direction)
+        try {
+            findNavController().navigate(direction)
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+        }
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
