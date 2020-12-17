@@ -7,6 +7,7 @@ import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.data.survey.SurveyRepository
 import com.github.ephelsa.mycareer.data.user.UserRepository
+import com.github.ephelsa.mycareer.delivery.auth.local.AuthLocalRepository
 import com.github.ephelsa.mycareer.delivery.auth.remote.AuthRemoteRepository
 import com.github.ephelsa.mycareer.delivery.documenttype.remote.DocumentTypeRemoteRepository
 import com.github.ephelsa.mycareer.delivery.institutiontype.remote.InstitutionTypeRemoteRepository
@@ -25,8 +26,9 @@ object RepositoriesProviders {
 
     @Provides
     fun provideAuthRepository(
-        authRemoteRepository: AuthRemoteRepository
-    ): AuthRepository = AuthRepository(authRemoteRepository)
+        authRemoteRepository: AuthRemoteRepository,
+        authLocalRepository: AuthLocalRepository
+    ): AuthRepository = AuthRepository(authRemoteRepository, authLocalRepository)
 
     @Provides
     fun provideLocationRepository(

@@ -7,6 +7,7 @@ import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.data.survey.SurveyRepository
 import com.github.ephelsa.mycareer.data.user.UserRepository
+import com.github.ephelsa.mycareer.usecase.auth.GetStoredCredentialsUseCase
 import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
 import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
 import com.github.ephelsa.mycareer.usecase.documenttype.DocumentTypesUseCase
@@ -75,4 +76,9 @@ object UseCasesProviders {
     fun provideUserInformationByEmailUseCase(
         userRepository: UserRepository
     ) = UserInformationByEmailUseCase(userRepository)
+
+    @Provides
+    fun provideGetStoredCredentialsUseCase(
+        authRepository: AuthRepository
+    ) = GetStoredCredentialsUseCase(authRepository)
 }

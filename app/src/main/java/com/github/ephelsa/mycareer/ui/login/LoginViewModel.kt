@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.ui.utils.ScopedViewModel
+import com.github.ephelsa.mycareer.usecase.auth.GetStoredCredentialsUseCase
 import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 
 class LoginViewModel @ViewModelInject constructor(
     uiDispatcher: CoroutineDispatcher,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    getStoredCredentialsUseCase: GetStoredCredentialsUseCase
 ) : ScopedViewModel(uiDispatcher) {
 
     private val _ui = MutableLiveData<UI>()
@@ -20,6 +22,8 @@ class LoginViewModel @ViewModelInject constructor(
 
     fun login(authCredentialRemote: AuthCredentialRemote) =
         loginUseCase(authCredentialRemote).asLiveData()
+
+    val storedCredentials = getStoredCredentialsUseCase().asLiveData()
 
     fun enableLoginButton(email: String, password: String, minPasswordSize: Int) {
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()

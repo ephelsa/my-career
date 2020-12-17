@@ -7,7 +7,7 @@ import com.github.ephelsa.mycareer.domain.auth.RegistryRemote
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class RegistryMapperKtTest {
+class RemoteMapperKtTest {
 
     @Test
     fun `RegistryRemote toDelivery`() {
@@ -51,9 +51,10 @@ class RegistryMapperKtTest {
 
     @Test
     fun `AuthCredentialRemote toDelivery`() {
-        val credentialRemote = AuthCredentialRemote("xephelsax@gmail.com", "TopSecret")
+        val credentialRemote =
+            AuthCredentialRemote("xephelsax@gmail.com", "TopSecret", "askd.siios")
 
-        val want = AuthCredentialJSON("xephelsax@gmail.com", "TopSecret")
+        val want = AuthCredentialJSON("xephelsax@gmail.com", "TopSecret", "askd.siios")
         val got = credentialRemote.toDelivery()
 
         assertEquals(want, got)

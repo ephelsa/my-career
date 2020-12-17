@@ -6,8 +6,9 @@ import com.google.gson.annotations.SerializedName
 
 data class AuthCredentialJSON(
     @SerializedName("email") val email: String?,
-    @SerializedName("password") val password: String?
+    @SerializedName("password") val password: String?,
+    @SerializedName("token") val token: String?
 ) : DomainMappable<AuthCredentialRemote> {
 
-    override fun toDomain() = AuthCredentialRemote(email, password)
+    override fun toDomain() = AuthCredentialRemote(email, password, token)
 }

@@ -22,4 +22,4 @@ fun RegistryRemote.toDelivery() = RegistryJSON(
     password
 )
 
-fun AuthCredentialRemote.toDelivery() = AuthCredentialJSON(email, password)
+fun AuthCredentialRemote.toDelivery() = AuthCredentialJSON(email, password, token)

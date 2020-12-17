@@ -11,6 +11,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
+import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.ui.dialog.DialogListener
 import com.github.ephelsa.mycareer.ui.dialog.ErrorDialog
@@ -105,6 +106,37 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
                     if (enableDefaultError) displayError(it.error)
                 }
                 is ResourceRemote.Complete -> if (onComplete != null) onComplete()
+            }
+        }
+    }
+
+    @JvmName("handleObservableLocal")
+    protected fun <T : Any> LiveData<ResourceLocal<T>>.handleObservable(
+        onLoading: ((ResourceLocal.Loading<T>) -> Unit)? = null,
+        onSuccess: ((ResourceLocal.Success<T>) -> Unit)? = null,
+        onError: ((ResourceLocal.Error<T>) -> Unit)? = null,
+        onComplete: (() -> Unit)? = null,
+
+        // Optionals
+        enableDefaultLoader: Boolean = true,
+    ) {
+        this.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResourceLocal.Loading -> {
+                    if (enableDefaultLoader) displayLoader()
+                    if (onLoading != null) onLoading(it)
+                }
+                is ResourceLocal.Success -> {
+                    if (enableDefaultLoader) hideLoader()
+                    if (onSuccess != null) onSuccess(it)
+                    if (onComplete != null) onComplete()
+                }
+                is ResourceLocal.Error -> {
+                    if (enableDefaultLoader) hideLoader()
+                    if (onError != null) onError(it)
+                    if (onComplete != null) onComplete()
+                }
+                is ResourceLocal.Complete -> if (onComplete != null) onComplete()
             }
         }
     }

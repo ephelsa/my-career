@@ -37,7 +37,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
         super.onViewCreated(view, savedInstanceState)
         bindClickListener()
         validateFields()
+        continueSession()
         viewModel.ui.observe(viewLifecycleOwner, Observer(::uiObserver))
+    }
+
+    private fun continueSession() {
+        viewModel.storedCredentials.handleObservable(
+            onSuccess = {
+                val credentials = it.data.remoteTransform()
+                fillFields(credentials)
+                login(credentials)
+            }
+        )
+    }
+
+    private fun fillFields(credentialRemote: AuthCredentialRemote): Unit = with(binding) {
+        emailInput.setText(credentialRemote.email)
+        passwordInput.setText(credentialRemote.password)
     }
 
     private fun bindClickListener() {
@@ -86,14 +102,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
         val credentials: AuthCredentialRemote = with(binding) {
             AuthCredentialRemote(emailInput.text?.toString(), passwordInput.text?.toString())
         }
+        login(credentials)
+    }
 
+    private fun login(credentialRemote: AuthCredentialRemote) {
         val successListener = object : DialogListener {
             override fun onClose(dialogFragment: DialogFragment) {
-                navigate(directions.surveysFragment(credentials.email!!))
+                navigate(directions.surveysFragment(credentialRemote.email!!))
             }
         }
 
-        viewModel.login(credentials).handleObservable(
+        viewModel.login(credentialRemote).handleObservable(
             onSuccess = { displaySuccess(successListener) }
         )
     }

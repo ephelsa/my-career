@@ -35,6 +35,7 @@ allprojects {
             LiveData           : '2.2.0',
             Hilt               : "${hilt_version}",
             HiltLifecycle      : '1.0.0-alpha01',
+            Room               : '2.2.6',
 
             Gson               : '2.8.6',
             Retrofit           : '2.9.0',
@@ -71,6 +72,11 @@ allprojects {
                 Hilt     : "androidx.hilt:hilt-lifecycle-viewmodel:${versions.HiltLifecycle}"
         ]
 
+        persistence = [
+                Room  : "androidx.room:room-runtime:${versions.Room}",
+                RoomKt: "androidx.room:room-ktx:${versions.Room}"
+        ]
+
         http = [
                 Gson             : "com.google.code.gson:gson:${versions.Gson}",
                 GsonConverter    : "com.squareup.retrofit2:converter-gson:${versions.Retrofit}",
@@ -85,13 +91,15 @@ allprojects {
 
         kapt = [
                 Hilt         : "com.google.dagger:hilt-android-compiler:${versions.Hilt}",
-                HiltLifecycle: "androidx.hilt:hilt-compiler:${versions.HiltLifecycle}"
+                HiltLifecycle: "androidx.hilt:hilt-compiler:${versions.HiltLifecycle}",
+                Room         : "androidx.room:room-compiler:${versions.Room}"
         ]
 
         unitTest = [
                 JUnit         : "junit:junit:${versions.JUnit}",
                 CoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.Coroutines}",
-                Mockk         : "io.mockk:mockk:${versions.Mockk}"
+                Mockk         : "io.mockk:mockk:${versions.Mockk}",
+                Room          : "androidx.room:room-testing:${versions.Room}"
         ]
 
         androidTest = [

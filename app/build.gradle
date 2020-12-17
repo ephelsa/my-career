@@ -43,7 +43,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0.4"
+        versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -99,6 +99,7 @@ dependencies {
     implementation androidX.values()
     implementation material.values()
     implementation http.values()
+    implementation persistence.values()
     implementation lifecycle.values()
 
     kapt kapt.values()
