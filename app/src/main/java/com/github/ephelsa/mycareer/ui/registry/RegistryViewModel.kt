@@ -39,6 +39,7 @@ private data class SendRegistryRequirements(
     var institutionName: Boolean = false,
     var email: Boolean = false,
     var password: Boolean = false,
+    var birthDate: Boolean = false
 )
 
 class RegistryViewModel @ViewModelInject constructor(

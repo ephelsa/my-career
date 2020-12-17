@@ -1,14 +1,14 @@
 package com.github.ephelsa.mycareer.delivery.shared.mapper
 
-import com.github.ephelsa.mycareer.TestSuiteSimple
-import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
-import com.github.ephelsa.mycareer.domain.shared.StatusRemote
-import com.github.ephelsa.mycareer.domain.shared.WrappedRemote
 import com.github.ephelsa.mycareer.delivery.shared.remote.GsonBuild
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.ErrorResponseJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.StatusResponseJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrappedListResponseJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrappedResponseJSON
+import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
+import com.github.ephelsa.mycareer.domain.shared.StatusRemote
+import com.github.ephelsa.mycareer.domain.shared.WrappedRemote
+import com.github.ephelsa.mycareer.helper.TestSuiteSimple
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import org.junit.Assert.assertEquals
@@ -25,12 +25,13 @@ class ResponseToRemoteMapperKtTest {
 
     @Test
     fun `ErrorResponseJSON json parser`() {
-        val raw = """
-            {
-                "message": "Something went wrong",
-                "details": "Oh, dude..."
-            }
-        """.trimIndent()
+        val raw =
+            """
+                {
+                    "message": "Something went wrong",
+                    "details": "Oh, dude..."
+                }
+            """.trimIndent()
 
         val got = GsonBuild.provideGson().fromJson(raw, ErrorResponseJSON::class.java)
         val want = ErrorResponseJSON("Something went wrong", "Oh, dude...")
@@ -144,7 +145,8 @@ class ResponseToRemoteMapperKtTest {
 
     @Test
     fun `WrappedListResponseJSON json parser`() {
-        val type = object : TypeToken<WrappedListResponseJSON<SomethingRemote, SomethingJson>>() {}.type
+        val type =
+            object : TypeToken<WrappedListResponseJSON<SomethingRemote, SomethingJson>>() {}.type
         val tests = listOf(
             TestSuiteSimple(
                 "with result and success",

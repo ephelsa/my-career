@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/content_start"
+    android:layout_marginTop="@dimen/spacing_small"
+    android:layout_marginEnd="@dimen/content_end"
+    android:layout_marginBottom="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/border_radius_normal"
+    app:cardElevation="@dimen/elevation_normal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_normal">
+
+        <TextView
+            android:id="@+id/name_text"
+            style="@style/Text.SubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="start"
+            tools:text="Perfilamiento de prueba" />
+
+        <TextView
+            android:id="@+id/description_text"
+            style="@style/Text.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_text"
+            android:layout_gravity="start"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textStyle="normal"
+            tools:text="Perfilamiento de prueba" />
+
+        <TextView
+            android:id="@+id/take_survey_button"
+            style="@style/Text.Body.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_text"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@string/button_take_survey" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

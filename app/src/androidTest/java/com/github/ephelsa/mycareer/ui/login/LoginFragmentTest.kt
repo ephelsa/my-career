@@ -1,7 +1,6 @@
 package com.github.ephelsa.mycareer.ui.login
 
 import android.content.Context
-import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
@@ -38,5 +37,4 @@ class LoginFragmentTest {
             Matchers.equalTo(R.id.registryFragment)
         )
     }
-
 }

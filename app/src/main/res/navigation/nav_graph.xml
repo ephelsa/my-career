@@ -32,5 +32,9 @@
     <fragment
         android:id="@+id/surveysFragment"
         android:name="com.github.ephelsa.mycareer.ui.surveys.SurveysFragment"
-        android:label="SurveysFragment" />
+        android:label="SurveysFragment" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -19,9 +19,15 @@
     <style name="Text" />
 
     <style name="Text.Title">
-        <item name="android:textSize">@dimen/font_larger</item>
+        <item name="android:textSize">@dimen/font_extra_larger</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.SubTitle">
+        <item name="android:textSize">@dimen/font_larger</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/silver</item>
     </style>
 
     <style name="Text.Body">

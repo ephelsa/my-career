@@ -1,4 +1,4 @@
-package com.github.ephelsa.mycareer
+package com.github.ephelsa.mycareer.helper
 
 data class TestSuiteSimple<T>(
     val description: String,

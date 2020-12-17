@@ -5,8 +5,10 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="tundora">#404040</color>
     <color name="black_alpha_60">#99000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="silver">#BCBCBC</color>
     <color name="white_alpha_60">#99FFFFFF</color>
     <color name="red_700">#D32F2F</color>
     <color name="green_700">#388E3C</color>

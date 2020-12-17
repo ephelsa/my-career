@@ -58,7 +58,7 @@
             style="@style/Text.Body.Action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_registry" />
+            android:text="@string/button_registry" />
 
     </LinearLayout>
 
@@ -113,7 +113,7 @@
             android:layout_marginTop="@dimen/content_top"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
             android:enabled="false"
-            android:text="@string/button_login" />
+            android:text="@string/button_get_into" />
 
     </LinearLayout>
 

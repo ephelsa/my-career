@@ -83,13 +83,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
     }
 
     private fun performAuth() {
-        val credentials = with(binding) {
+        val credentials: AuthCredentialRemote = with(binding) {
             AuthCredentialRemote(emailInput.text?.toString(), passwordInput.text?.toString())
         }
 
         val successListener = object : DialogListener {
             override fun onClose(dialogFragment: DialogFragment) {
-                navigate(directions.surveysFragment())
+                navigate(directions.surveysFragment(credentials.email!!))
             }
         }
 

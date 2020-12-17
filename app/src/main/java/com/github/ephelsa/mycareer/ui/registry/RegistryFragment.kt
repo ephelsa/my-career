@@ -74,7 +74,7 @@ class RegistryFragment :
     private fun bindClickListener() {
         with(binding) {
             loginButton.setOnClickListener(this@RegistryFragment)
-            backButton.setOnClickListener(this@RegistryFragment)
+            toolbar.backButton.setOnClickListener(this@RegistryFragment)
             completeRegistryButton.setOnClickListener(this@RegistryFragment)
         }
     }
@@ -336,7 +336,7 @@ class RegistryFragment :
     override fun onClick(v: View?) {
         when (v) {
             binding.loginButton -> findNavController().popBackStack()
-            binding.backButton -> findNavController().popBackStack()
+            binding.toolbar.backButton -> findNavController().popBackStack()
             binding.completeRegistryButton -> performRegistry()
         }
     }

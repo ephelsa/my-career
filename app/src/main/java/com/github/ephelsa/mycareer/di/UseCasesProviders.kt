@@ -6,6 +6,7 @@ import com.github.ephelsa.mycareer.data.institutiontype.InstitutionTypeRepositor
 import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.data.survey.SurveyRepository
+import com.github.ephelsa.mycareer.data.user.UserRepository
 import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
 import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
 import com.github.ephelsa.mycareer.usecase.documenttype.DocumentTypesUseCase
@@ -15,6 +16,7 @@ import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
 import com.github.ephelsa.mycareer.usecase.location.MunicipalitiesByCountryAndDepartmentUseCase
 import com.github.ephelsa.mycareer.usecase.studylevel.StudyLevelsUseCase
 import com.github.ephelsa.mycareer.usecase.survey.SurveysUseCase
+import com.github.ephelsa.mycareer.usecase.user.UserInformationByEmailUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,4 +70,9 @@ object UseCasesProviders {
     fun provideSurveysUseCase(
         surveyRepository: SurveyRepository
     ) = SurveysUseCase(surveyRepository)
+
+    @Provides
+    fun provideUserInformationByEmailUseCase(
+        userRepository: UserRepository
+    ) = UserInformationByEmailUseCase(userRepository)
 }

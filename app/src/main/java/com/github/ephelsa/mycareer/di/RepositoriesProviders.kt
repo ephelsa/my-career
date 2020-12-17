@@ -6,12 +6,14 @@ import com.github.ephelsa.mycareer.data.institutiontype.InstitutionTypeRepositor
 import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.data.survey.SurveyRepository
+import com.github.ephelsa.mycareer.data.user.UserRepository
 import com.github.ephelsa.mycareer.delivery.auth.remote.AuthRemoteRepository
 import com.github.ephelsa.mycareer.delivery.documenttype.remote.DocumentTypeRemoteRepository
 import com.github.ephelsa.mycareer.delivery.institutiontype.remote.InstitutionTypeRemoteRepository
 import com.github.ephelsa.mycareer.delivery.location.remote.LocationRemoteRepository
 import com.github.ephelsa.mycareer.delivery.studylevel.remote.StudyLevelRemoteRepository
 import com.github.ephelsa.mycareer.delivery.survey.remote.SurveyRemoteRepository
+import com.github.ephelsa.mycareer.delivery.user.remote.UserRemoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,4 +52,9 @@ object RepositoriesProviders {
     fun providesSurveyRepository(
         surveyRemoteRepository: SurveyRemoteRepository
     ): SurveyRepository = SurveyRepository(surveyRemoteRepository)
+
+    @Provides
+    fun providesUserRepository(
+        userRemoteRepository: UserRemoteRepository
+    ): UserRepository = UserRepository(userRemoteRepository)
 }

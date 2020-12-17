@@ -1,27 +1,32 @@
 <resources>
     <string name="app_name">MyCareer</string>
 
-    <!-- login screen -->
-    <string name="label_without_user">¿Aún no tienes usuario?</string>
-    <string name="label_registry">Regístrate</string>
-    <string name="hint_email">Correo electrónico</string>
-    <string name="hint_pass">Contraseña</string>
-    <string name="button_login">Ingresar</string>
-
-    <!-- registry screen -->
+    <!-- buttons -->
+    <string name="button_get_into">Ingresar</string>
     <string name="button_complete_registry">Completar registro</string>
+    <string name="button_login">Inicia sesión</string>
+    <string name="button_registry">Regístrate</string>
+    <string name="button_take_survey">Iniciar cuestionario</string>
+
+    <!-- labels -->
+    <string name="label_without_user">¿Aún no tienes usuario?</string>
     <string name="label_has_user">¿Tienes usuario?</string>
-    <string name="label_login">Inicia sesión</string>
+    <string name="label_hello">¡Hola!</string>
+
+    <!-- hints -->
     <string name="hint_first_name">Primer nombre</string>
     <string name="hint_second_name">Segundo nombre</string>
     <string name="hint_first_surname">Primer apellido</string>
     <string name="hint_second_surname">Segundo apellido</string>
     <string name="hint_document_type">Tipo de documento</string>
     <string name="hint_document">Documento de identidad</string>
+    <string name="hint_birth_date">Fecha de nacimiento</string>
     <string name="hint_country">País</string>
     <string name="hint_department">Departamento</string>
     <string name="hint_municipality">Municipio</string>
     <string name="hint_study_level">Nivel educativo</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_pass">Contraseña</string>
     <string name="hint_institution_type">Tipo de institución educativa</string>
     <string name="hint_institution">Institución educativa</string>
     <string name="hint_pass_confirm">Confirma tu contraseña</string>
@@ -29,12 +34,6 @@
     <!-- content descriptions -->
     <string name="content_description_back_button">Regresar</string>
     <string name="content_description_close_button">Cerrar</string>
-
-    <!-- temporal resources -->
-    <string name="temp_loading">Cargando %s</string>
-    <string name="temp_success">Recurso listo %s</string>
-    <string name="temp_error">Error %s</string>
-    <string name="temp_complete">Completado %s</string>
 
     <!-- errors -->
     <string name="error_email">Correo inválido</string>
@@ -52,12 +51,15 @@
     <string name="error_document">Documento inválido o vacío</string>
     <string name="error_institution_name">Nombre de la institución inválido o vacío</string>
     <string name="error_password_match_length">Las contraseñas deben de ser iguales y tener un mínimo de %d caracteres</string>
+    <string name="error_results_not_found">No se encontraron resultados :(</string>
+    <string name="error_can_not_retrieve_information">No se pudo obtener información</string>
 
     <!-- loading messages -->
     <string name="loading_countries">Cargando paises</string>
     <string name="loading_document_types">Cargando tipos de documentos</string>
     <string name="loading_study_levels">Cargando niveles educativos</string>
     <string name="loading_institution_types">Cargando tipos de instituciones</string>
+    <string name="loading_user_info">Cargando información del usuario…</string>
 
     <!-- success messages -->
     <string name="success_registry">¡Registro exitoso! Mira Revisa tu correo: %s</string>

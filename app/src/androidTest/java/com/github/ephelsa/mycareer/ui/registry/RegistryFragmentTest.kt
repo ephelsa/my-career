@@ -45,6 +45,5 @@ class RegistryFragmentTest {
             onView(ViewMatchers.withId(tt.idViewToNav)).perform(ViewActions.click())
             assertEquals(tt.name, tt.expectedDirection, navController.currentDestination?.id)
         }
-
     }
 }

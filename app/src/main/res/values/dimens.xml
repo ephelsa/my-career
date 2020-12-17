@@ -7,7 +7,8 @@
     <dimen name="content_end">16dp</dimen>
 
     <!-- font sizes  -->
-    <dimen name="font_larger">32sp</dimen>
+    <dimen name="font_extra_larger">32sp</dimen>
+    <dimen name="font_larger">24sp</dimen>
     <dimen name="font_normal">15sp</dimen>
 
     <!-- spacing between two views -->
@@ -18,9 +19,11 @@
     <!-- elevation -->
     <dimen name="elevation_high">6dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>
+    <dimen name="elevation_none">0dp</dimen>
 
     <!-- border radius -->
     <dimen name="border_radius_normal">4dp</dimen>
+    <dimen name="border_radius_none">0dp</dimen>
 
     <!-- specific sizes -->
     <dimen name="specific_studying_width">200dp</dimen>
