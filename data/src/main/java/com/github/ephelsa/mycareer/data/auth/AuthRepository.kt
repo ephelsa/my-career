@@ -14,6 +14,9 @@ class AuthRepository(
     suspend fun login(authCredentialRemote: AuthCredentialRemote) =
         authRemoteDataSource.login(authCredentialRemote)
 
+    // Local
+    suspend fun deleteStoredSessions() = authLocalDataSource.deleteStoredSessions()
+
     suspend fun storeSession(authCredentialLocal: AuthCredentialLocal) =
         authLocalDataSource.storeSession(authCredentialLocal)
 

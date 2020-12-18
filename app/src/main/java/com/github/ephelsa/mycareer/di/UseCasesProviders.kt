@@ -7,9 +7,7 @@ import com.github.ephelsa.mycareer.data.location.LocationRepository
 import com.github.ephelsa.mycareer.data.studylevel.StudyLevelRepository
 import com.github.ephelsa.mycareer.data.survey.SurveyRepository
 import com.github.ephelsa.mycareer.data.user.UserRepository
-import com.github.ephelsa.mycareer.usecase.auth.GetStoredCredentialsUseCase
-import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
-import com.github.ephelsa.mycareer.usecase.auth.RegisterAUserUseCase
+import com.github.ephelsa.mycareer.usecase.auth.*
 import com.github.ephelsa.mycareer.usecase.documenttype.DocumentTypesUseCase
 import com.github.ephelsa.mycareer.usecase.institutiontype.InstitutionTypesUseCase
 import com.github.ephelsa.mycareer.usecase.location.CountriesUseCase
@@ -29,8 +27,9 @@ object UseCasesProviders {
 
     @Provides
     fun provideLoginUseCase(
-        authRepository: AuthRepository
-    ) = LoginUseCase(authRepository)
+        authRepository: AuthRepository,
+        storeSessionUseCase: StoreSessionUseCase
+    ) = LoginUseCase(authRepository, storeSessionUseCase)
 
     @Provides
     fun provideRegisterAUserUseCase(
@@ -81,4 +80,15 @@ object UseCasesProviders {
     fun provideGetStoredCredentialsUseCase(
         authRepository: AuthRepository
     ) = GetStoredCredentialsUseCase(authRepository)
+
+    @Provides
+    fun provideStoreSessionUseCase(
+        authRepository: AuthRepository,
+        deleteStoredSessions: DeleteStoredSessions
+    ) = StoreSessionUseCase(authRepository, deleteStoredSessions)
+
+    @Provides
+    fun provideDeleteStoredSessions(
+        authRepository: AuthRepository
+    ) = DeleteStoredSessions(authRepository)
 }
