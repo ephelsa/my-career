@@ -1,11 +1,22 @@
 package com.github.ephelsa.mycareer.delivery.auth.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity
-data class SessionEntity(
-    @PrimaryKey val email: String,
-    val password: String,
-    val token: String
+@Entity(
+    tableName = SessionEntity.TABLE_NAME,
+    primaryKeys = [SessionEntity.EMAIL]
 )
+data class SessionEntity(
+    @ColumnInfo(name = EMAIL) val email: String,
+    @ColumnInfo(name = PASSWORD) val password: String,
+    @ColumnInfo(name = TOKEN) val token: String
+) {
+    companion object {
+        const val TABLE_NAME = "session"
+
+        const val EMAIL = "email"
+        const val PASSWORD = "pass"
+        const val TOKEN = "token"
+    }
+}

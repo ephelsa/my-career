@@ -2,7 +2,8 @@ package com.github.ephelsa.mycareer.delivery.survey.remote
 
 import com.github.ephelsa.mycareer.data.survey.SurveyRemoteDataSource
 import com.github.ephelsa.mycareer.delivery.shared.mapper.toDomain
-import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler
+import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler.handleError
+import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler.handleSuccess
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyWithQuestionsRemote
@@ -20,13 +21,19 @@ class SurveyRemoteRepository @Inject constructor(
     override suspend fun surveys(): ResourceRemote<List<SurveyRemote>> = withContext(dispatcher) {
         try {
             val responseJSON = surveyService.surveys()
-            WrapperRemoteHandler.handleSuccess(responseJSON.toDomain())
+            handleSuccess(responseJSON.toDomain())
         } catch (e: Exception) {
-            WrapperRemoteHandler.handleError<List<SurveyRemote>>(e)
+            handleError<List<SurveyRemote>>(e)
         }
     }
 
-    override suspend fun surveyWithQuestions(surveyCode: Int): ResourceRemote<SurveyWithQuestionsRemote> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun surveyWithQuestions(surveyCode: Int): ResourceRemote<SurveyWithQuestionsRemote> =
+        withContext(dispatcher) {
+            try {
+                val responseJSON = surveyService.surveyWithQuestions(surveyCode)
+                handleSuccess(responseJSON.toDomain())
+            } catch (e: Exception) {
+                handleError<SurveyWithQuestionsRemote>(e)
+            }
+        }
 }

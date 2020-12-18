@@ -14,7 +14,7 @@ import com.github.ephelsa.mycareer.usecase.location.CountriesUseCase
 import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
 import com.github.ephelsa.mycareer.usecase.location.MunicipalitiesByCountryAndDepartmentUseCase
 import com.github.ephelsa.mycareer.usecase.studylevel.StudyLevelsUseCase
-import com.github.ephelsa.mycareer.usecase.survey.SurveysUseCase
+import com.github.ephelsa.mycareer.usecase.survey.*
 import com.github.ephelsa.mycareer.usecase.user.UserInformationByEmailUseCase
 import dagger.Module
 import dagger.Provides
@@ -91,4 +91,50 @@ object UseCasesProviders {
     fun provideDeleteStoredSessions(
         authRepository: AuthRepository
     ) = DeleteStoredSessions(authRepository)
+
+    @Provides
+    fun provideSurveyWithQuestionsUseCase(
+        surveyRepository: SurveyRepository,
+        surveyQuestionsAndAnswersUseCase: StoreSurveyQuestionsAndAnswersUseCase
+    ) = SurveyWithQuestionsUseCase(surveyRepository, surveyQuestionsAndAnswersUseCase)
+
+    @Provides
+    fun provideStoreSurveyQuestionsUseCase(
+        surveyRepository: SurveyRepository
+    ) = StoreSurveyQuestionsUseCase(surveyRepository)
+
+    @Provides
+    fun provideStoreSurveyQuestionAnswersUseCase(
+        surveyRepository: SurveyRepository
+    ) = StoreSurveyQuestionAnswersUseCase(surveyRepository)
+
+    @Provides
+    fun provideStoreSurveyQuestionsAndAnswersUseCase(
+        storeSurveyQuestionsUseCase: StoreSurveyQuestionsUseCase,
+        storeSurveyQuestionAnswersUseCase: StoreSurveyQuestionAnswersUseCase,
+        deleteStoredQuestionsAndAnswersUseCase: DeleteStoredQuestionsAndAnswersUseCase
+    ) = StoreSurveyQuestionsAndAnswersUseCase(
+        storeSurveyQuestionsUseCase,
+        storeSurveyQuestionAnswersUseCase,
+        deleteStoredQuestionsAndAnswersUseCase
+    )
+
+    @Provides
+    fun provideDeleteStoredQuestionsUseCase(
+        surveyRepository: SurveyRepository
+    ) = DeleteStoredQuestionsUseCase(surveyRepository)
+
+    @Provides
+    fun provideDeleteStoredQuestionsAnswersUseCase(
+        surveyRepository: SurveyRepository
+    ) = DeleteStoredQuestionsAnswersUseCase(surveyRepository)
+
+    @Provides
+    fun provideDeleteStoredQuestionsAndAnswersUseCase(
+        deleteStoredQuestionsUseCase: DeleteStoredQuestionsUseCase,
+        deleteStoredQuestionsAnswersUseCase: DeleteStoredQuestionsAnswersUseCase
+    ) = DeleteStoredQuestionsAndAnswersUseCase(
+        deleteStoredQuestionsUseCase,
+        deleteStoredQuestionsAnswersUseCase
+    )
 }

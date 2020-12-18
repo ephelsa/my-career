@@ -1,7 +1,6 @@
 package com.github.ephelsa.mycareer.ui.surveys
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +24,7 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
     private val viewModel: SurveysViewModel by viewModels()
     private lateinit var surveyAdapter: SurveyAdapter
     private val args: SurveysFragmentArgs by navArgs()
+    private val directions = SurveysFragmentDirections
 
     companion object {
         private val TAG = SurveysFragment::class.java.simpleName
@@ -83,8 +83,8 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
 
     private fun configureSurveyRecycler(surveysRemote: List<SurveyRemote>) {
         // Configure click actions
-        surveyAdapter = SurveyAdapter(surveysRemote) { takeSurveyClick ->
-            Log.v(TAG, "$takeSurveyClick")
+        surveyAdapter = SurveyAdapter(surveysRemote) { click ->
+            takeSurvey(click.id)
         }
 
         // Configure recycler
@@ -93,5 +93,14 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@SurveysFragment.requireContext())
         }
+    }
+
+    private fun takeSurvey(surveyCode: Int) {
+        viewModel.surveyWithQuestions(surveyCode)
+            .handleObservable(
+                onSuccess = {
+                    navigate(directions.questionFragment())
+                }
+            )
     }
 }

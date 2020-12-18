@@ -8,12 +8,12 @@ import com.github.ephelsa.mycareer.delivery.auth.entity.SessionEntity
 
 @Dao
 interface AuthDao {
-    @Query("DELETE FROM SessionEntity")
-    suspend fun deleteStoredSessions()
+    @Query("DELETE FROM session")
+    suspend fun deleteSessions()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun storeSessionCredentials(sessionEntity: SessionEntity)
+    suspend fun insertSession(sessionEntity: SessionEntity)
 
-    @Query("SELECT * FROM SessionEntity LIMIT 1")
-    suspend fun getStoredSessionCredentials(): SessionEntity
+    @Query("SELECT * FROM session LIMIT 1")
+    suspend fun getStoredSession(): SessionEntity
 }

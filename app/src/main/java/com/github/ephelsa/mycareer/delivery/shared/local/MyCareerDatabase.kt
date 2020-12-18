@@ -4,12 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.github.ephelsa.mycareer.delivery.auth.entity.SessionEntity
 import com.github.ephelsa.mycareer.delivery.auth.local.AuthDao
-import javax.inject.Singleton
+import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
+import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
+import com.github.ephelsa.mycareer.delivery.survey.local.SurveyDao
 
-@Singleton
-@Database(entities = [SessionEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        SessionEntity::class,
+        QuestionEntity::class,
+        QuestionAnswerEntity::class
+    ],
+    version = 2,
+    exportSchema = false
+)
+@TypeConverters(Converters::class)
 abstract class MyCareerDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "my-career"
@@ -30,4 +41,5 @@ abstract class MyCareerDatabase : RoomDatabase() {
     }
 
     abstract fun authDao(): AuthDao
+    abstract fun surveyDao(): SurveyDao
 }

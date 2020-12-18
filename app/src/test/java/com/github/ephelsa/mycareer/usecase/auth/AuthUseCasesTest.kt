@@ -1,8 +1,6 @@
 package com.github.ephelsa.mycareer.usecase.auth
 
 import com.github.ephelsa.mycareer.data.auth.AuthRepository
-import com.github.ephelsa.mycareer.delivery.auth.mapper.toDelivery
-import com.github.ephelsa.mycareer.domain.auth.AuthCredentialLocal
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.domain.auth.RegistryRemote
 import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
@@ -13,7 +11,6 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -114,7 +111,9 @@ class AuthUseCasesTest {
         val useCase = LoginUseCase(repository, storeLoginUseCase)
         val credentials = AuthCredentialRemote("xephelsax@gmail.com", "123456")
 
-        coEvery { repository.storeSession(credentials.localTransform()) } returns ResourceLocal.Error<Unit>(NullPointerException())
+        coEvery { repository.storeSession(credentials.localTransform()) } returns ResourceLocal.Error<Unit>(
+            NullPointerException()
+        )
         coEvery { repository.login(credentials) } returns login
 
         runBlockingTest(testDispatcher) {
@@ -129,7 +128,8 @@ class AuthUseCasesTest {
                     is ResourceRemote.Complete -> assert(true)
                 }
             }
-        }    }
+        }
+    }
 
     @Test
     fun `LoginUseCase invalid credentials`() {

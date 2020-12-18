@@ -4,5 +4,5 @@ data class SurveyWithQuestionsRemote(
     val id: Int,
     val name: String,
     val description: String?,
-    val questionsWithAnswersRemote: List<QuestionWithAnswersRemote>
+    val questionsWithAnswers: List<QuestionWithAnswersRemote>
 )
