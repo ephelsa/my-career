@@ -45,10 +45,6 @@
         <item name="android:textColor">@color/red_700</item>
     </style>
 
-    <style name="Text.Title.Error">
-        <item name="android:textColor">@color/red_700</item>
-    </style>
-
     <style name="Text.Title.Success">
         <item name="android:textColor">@color/green_700</item>
     </style>

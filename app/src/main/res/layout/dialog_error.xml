@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="@dimen/border_radius_normal">
 
     <RelativeLayout
@@ -28,12 +27,22 @@
 
         <TextView
             android:id="@+id/error_title_text"
-            style="@style/Text.Title.Error"
+            style="@style/Text.SubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:layout_toStartOf="@id/close_button"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/error_text"
+            style="@style/Text.Error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/error_title_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:gravity="center" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -45,16 +54,6 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/error_lottie" />
-
-        <TextView
-            android:id="@+id/error_text"
-            style="@style/Text.Error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/error_lottie"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:gravity="center" />
 
     </RelativeLayout>
 

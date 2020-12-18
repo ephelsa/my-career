@@ -16,7 +16,7 @@ import com.github.ephelsa.mycareer.databinding.DialogSuccessBinding
 
 class SuccessDialog(
     var dialogListener: DialogListener? = null
-) : DialogFragment(), View.OnClickListener, Animator.AnimatorListener {
+) : DialogFragment(), Animator.AnimatorListener {
 
     private lateinit var binding: DialogSuccessBinding
 
@@ -26,7 +26,6 @@ class SuccessDialog(
         savedInstanceState: Bundle?
     ): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        bindClickListener()
         bindLottieListener()
 
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -42,18 +41,8 @@ class SuccessDialog(
             .create()
     }
 
-    private fun bindClickListener() {
-        binding.closeButton.setOnClickListener(this)
-    }
-
     private fun bindLottieListener() {
         binding.successLottie.addAnimatorListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            binding.closeButton -> dismiss()
-        }
     }
 
     override fun onAnimationStart(animation: Animator?) {
