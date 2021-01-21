@@ -21,4 +21,6 @@ class SurveyRepository(
 
     suspend fun storeQuestionsAnswers(questionsAnswersLocal: List<QuestionAnswerLocal>) =
         surveyLocalDataSource.storeQuestionsAnswers(questionsAnswersLocal)
+
+    suspend fun getQuestionsAndAnswers() = surveyLocalDataSource.getQuestionsAndAnswers()
 }

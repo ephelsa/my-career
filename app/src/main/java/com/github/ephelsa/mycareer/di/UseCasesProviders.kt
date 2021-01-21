@@ -84,13 +84,13 @@ object UseCasesProviders {
     @Provides
     fun provideStoreSessionUseCase(
         authRepository: AuthRepository,
-        deleteStoredSessions: DeleteStoredSessions
-    ) = StoreSessionUseCase(authRepository, deleteStoredSessions)
+        deleteStoredSessionsUseCase: DeleteStoredSessionsUseCase
+    ) = StoreSessionUseCase(authRepository, deleteStoredSessionsUseCase)
 
     @Provides
     fun provideDeleteStoredSessions(
         authRepository: AuthRepository
-    ) = DeleteStoredSessions(authRepository)
+    ) = DeleteStoredSessionsUseCase(authRepository)
 
     @Provides
     fun provideSurveyWithQuestionsUseCase(
@@ -137,4 +137,9 @@ object UseCasesProviders {
         deleteStoredQuestionsUseCase,
         deleteStoredQuestionsAnswersUseCase
     )
+
+    @Provides
+    fun provideQuestionsAndQuestionsAnswersUseCase(
+        surveyRepository: SurveyRepository
+    ) = StoredQuestionsAndQuestionAnswersUseCase(surveyRepository)
 }

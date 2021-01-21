@@ -3,6 +3,8 @@ package com.github.ephelsa.mycareer.delivery.survey.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
+import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAndQuestionsAnswersRelation
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
 
@@ -19,4 +21,8 @@ interface SurveyDao {
 
     @Insert
     suspend fun insertQuestionAnswer(vararg questionAnswerEntity: QuestionAnswerEntity)
+
+    @Transaction
+    @Query("SELECT * FROM question WHERE id IN (SELECT DISTINCT(question.id) FROM question_answer)")
+    suspend fun getQuestionsAndQuestionAnswers(): List<QuestionAndQuestionsAnswersRelation>
 }

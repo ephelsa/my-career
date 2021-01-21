@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.flow
 
 class StoreSessionUseCase(
     private val authRepository: AuthRepository,
-    private val deleteStoredSessions: DeleteStoredSessions
+    private val deleteStoredSessionsUseCase: DeleteStoredSessionsUseCase
 ) {
     operator fun invoke(authCredentialLocal: AuthCredentialLocal) = flow {
         emit(ResourceLocal.Loading())
 
-        deleteStoredSessions()
+        deleteStoredSessionsUseCase()
             .catch {
                 emit(authRepository.storeSession(authCredentialLocal))
             }

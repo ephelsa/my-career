@@ -4,7 +4,9 @@ import com.github.ephelsa.mycareer.data.survey.SurveyLocalDataSource
 import com.github.ephelsa.mycareer.delivery.shared.local.LocalHandler.handleError
 import com.github.ephelsa.mycareer.delivery.shared.local.LocalHandler.handleSuccess
 import com.github.ephelsa.mycareer.delivery.survey.mapper.toDelivery
+import com.github.ephelsa.mycareer.delivery.survey.mapper.toDomain
 import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
+import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
 import kotlinx.coroutines.CoroutineDispatcher
@@ -52,6 +54,16 @@ class SurveyLocalRepository @Inject constructor(
                 handleSuccess(operation)
             } catch (e: Exception) {
                 handleError<Unit>(e)
+            }
+        }
+
+    override suspend fun getQuestionsAndAnswers(): ResourceLocal<List<QuestionAndQuestionsAnswersLocal>> =
+        withContext(dispatcher) {
+            try {
+                val operation = surveyDao.getQuestionsAndQuestionAnswers()
+                handleSuccess(operation.toDomain())
+            } catch (e: Exception) {
+                handleError<List<QuestionAndQuestionsAnswersLocal>>(e)
             }
         }
 }

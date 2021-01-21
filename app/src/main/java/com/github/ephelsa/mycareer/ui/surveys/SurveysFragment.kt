@@ -19,7 +19,7 @@ import com.github.ephelsa.mycareer.ui.utils.isLoading
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
+class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickListener {
 
     private val viewModel: SurveysViewModel by viewModels()
     private lateinit var surveyAdapter: SurveyAdapter
@@ -32,6 +32,7 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
 
     private val surveys: () -> Unit = {
         viewModel.surveys.handleObservable(
+            enableDefaultError = false,
             onSuccess = {
                 viewModel.verifyListOfSurveys(it.data) // Verify to display or hide recycler
                 configureSurveyRecycler(it.data)
@@ -44,13 +45,13 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
             enableDefaultError = false,
             enableDefaultLoader = false,
             onLoading = {
-                binding.toolbar.nameText.isLoading()
+                binding.userInformation.nameText.isLoading()
             },
             onSuccess = {
-                binding.toolbar.nameText.text = it.data.fullNamePresentation()
+                binding.userInformation.nameText.text = it.data.fullNamePresentation()
             },
             onError = {
-                binding.toolbar.nameText.hasError(getString(R.string.error_can_not_retrieve_information))
+                binding.userInformation.nameText.hasError(getString(R.string.error_can_not_retrieve_information))
             }
         )
     }
@@ -68,6 +69,11 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
         uiObservers()
         userInformation()
         surveys()
+        bindClickListener()
+    }
+
+    private fun bindClickListener() {
+        binding.toolbar.logoutButton.setOnClickListener(this)
     }
 
     private fun uiObservers() {
@@ -100,6 +106,21 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>() {
             .handleObservable(
                 onSuccess = {
                     navigate(directions.questionFragment())
+                }
+            )
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.toolbar.logoutButton -> performLogout()
+        }
+    }
+
+    private fun performLogout() {
+        viewModel.deleteStoredSessions
+            .handleObservable(
+                onSuccess = {
+                    navigate(directions.loginFragment())
                 }
             )
     }

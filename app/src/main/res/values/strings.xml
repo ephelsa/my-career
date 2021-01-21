@@ -7,11 +7,19 @@
     <string name="button_login">Inicia sesión</string>
     <string name="button_registry">Regístrate</string>
     <string name="button_take_survey">Iniciar cuestionario</string>
+    <string name="button_logout">Cerrar sesión</string>
+    <string name="button_home">Ir al inicio</string>
+    <string name="button_next">Siguiente pregunta</string>
+    <string name="button_before">Anterior</string>
+    <string name="button_view_results">Ver resultados</string>
 
     <!-- labels -->
     <string name="label_without_user">¿Aún no tienes usuario?</string>
     <string name="label_has_user">¿Tienes usuario?</string>
     <string name="label_hello">¡Hola!</string>
+    <string name="label_start_forms">Puedes empezar llenando uno de estos formularios 👇</string>
+    <string name="label_profiling">Perfilamiento</string>
+    <string name="label_question_counter">Pregunta %d de %d</string>
 
     <!-- hints -->
     <string name="hint_first_name">Primer nombre</string>
@@ -53,6 +61,10 @@
     <string name="error_password_match_length">Las contraseñas deben de ser iguales y tener un mínimo de %d caracteres</string>
     <string name="error_results_not_found">No se encontraron resultados :(</string>
     <string name="error_can_not_retrieve_information">No se pudo obtener información</string>
+    <string name="error_questions_and_questions_answers_empty">No se hay preguntas para cargar</string>
+
+    <!-- warning messages -->
+    <string name="warning_work_in_progress">En proceso de construcción</string>
 
     <!-- loading messages -->
     <string name="loading_countries">Cargando paises</string>

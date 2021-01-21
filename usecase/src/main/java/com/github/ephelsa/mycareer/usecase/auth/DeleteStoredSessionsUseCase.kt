@@ -4,7 +4,7 @@ import com.github.ephelsa.mycareer.data.auth.AuthRepository
 import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import kotlinx.coroutines.flow.flow
 
-class DeleteStoredSessions(
+class DeleteStoredSessionsUseCase(
     private val authRepository: AuthRepository
 ) {
     operator fun invoke() = flow {
