@@ -17,7 +17,7 @@ import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class QuestionFragment() :
+class QuestionFragment :
     BaseFragment<FragmentQuestionBinding>(),
     View.OnClickListener,
     DynamicQuestionFragment.AnsweredListener {
@@ -61,7 +61,6 @@ class QuestionFragment() :
                     message = getString(R.string.error_questions_and_questions_answers_empty),
                     details = getString(R.string.error_questions_and_questions_answers_empty)
                 )
-                Log.e(TAG, error.message)
                 displayError(error)
             }
         }
