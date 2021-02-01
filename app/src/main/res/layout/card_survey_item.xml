@@ -49,8 +49,6 @@
             android:layout_marginTop="@dimen/spacing_small"
             app:progressView_animation="decelerate"
             app:progressView_autoAnimate="true"
-            app:progressView_labelColorInner="@color/black"
-            app:progressView_labelColorOuter="@color/tundora"
             app:progressView_colorProgress="@color/silver"
             app:progressView_labelSize="@dimen/font_normal" />
 

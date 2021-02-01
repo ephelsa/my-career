@@ -76,4 +76,5 @@
 
     <!-- success messages -->
     <string name="success_registry">¡Registro exitoso! Mira Revisa tu correo: %s</string>
+    <string name="success_survey_complete">¡Formulario completado!</string>
 </resources>

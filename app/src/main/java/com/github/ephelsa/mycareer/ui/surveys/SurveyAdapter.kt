@@ -3,6 +3,7 @@ package com.github.ephelsa.mycareer.ui.surveys
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ephelsa.mycareer.R
@@ -52,11 +53,27 @@ class SurveyAdapter(
             if (answered == null) {
                 completeProgress.isVisible = false
             } else {
+                val isComplete = total == answered
                 completeProgress.min = 0F
                 completeProgress.max = total.toFloat()
                 completeProgress.progress = answered.toFloat()
-                completeProgress.labelText = root.context
-                    .getString(R.string.label_questions_answered, answered, total)
+                // Label text
+                completeProgress.labelText = if (isComplete)
+                    root.context.getString(R.string.success_survey_complete)
+                else
+                    root.context.getString(R.string.label_questions_answered, answered, total)
+
+                // Progress color
+                completeProgress.highlightView.color = if (isComplete)
+                    ContextCompat.getColor(root.context, R.color.green_700)
+                else
+                    ContextCompat.getColor(root.context, R.color.silver)
+
+                // Label color text color
+                completeProgress.labelColorInner = if (isComplete)
+                    ContextCompat.getColor(root.context, R.color.black)
+                else
+                    ContextCompat.getColor(root.context, R.color.white)
             }
         }
 
