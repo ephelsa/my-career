@@ -73,8 +73,7 @@ class QuestionFragment :
         val dynamic = DynamicQuestionFragment
             .newInstance(questionsAndQuestionsAnswers[currentQuestionPos], this)
 
-        handleButtonEnableBounds()
-        binding.nextButton.isEnabled = false
+        handleButtonEnableBounds(false)
         handleQuestionCounter()
 
         requireActivity().supportFragmentManager
@@ -101,14 +100,13 @@ class QuestionFragment :
 
     private fun handleViewResults(isComplete: Boolean) {
         binding.resultsButton.isVisible = isComplete
-        binding.nextButton.isEnabled = !isComplete
     }
 
-    private fun handleButtonEnableBounds() {
-        val notEnd = currentQuestionPos + 1 < questionsAndQuestionsAnswers.size
-        binding.nextButton.isEnabled = notEnd
+    private fun handleButtonEnableBounds(isValid: Boolean) {
+        val isEnd = currentQuestionPos + 1 == questionsAndQuestionsAnswers.size
+        binding.nextButton.isEnabled = !isEnd && isValid
         binding.beforeButton.isEnabled = currentQuestionPos > 0
-        handleViewResults(!notEnd)
+        handleViewResults(isEnd && isValid)
     }
 
     override fun onClick(v: View?) {
@@ -137,7 +135,7 @@ class QuestionFragment :
         ).show()
     }
 
-    override fun onAnswered(question: QuestionAndQuestionsAnswersLocal) {
-        handleButtonEnableBounds()
+    override fun onAnswered(answer: String, isValid: Boolean) {
+        handleButtonEnableBounds(isValid)
     }
 }

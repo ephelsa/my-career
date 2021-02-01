@@ -1,7 +1,9 @@
 package com.github.ephelsa.mycareer.ui.question
 
 import android.content.Context
+import android.text.TextWatcher
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -12,34 +14,46 @@ class DynamicQuestionView private constructor(
     private val context: Context,
     private val questionID: String?,
     private val questionType: QuestionTypeLocal?,
-    private val answers: List<QuestionAnswerLocal?>?
+    private val answers: List<QuestionAnswerLocal?>?,
+    private val checkedChangeListener: CompoundButton.OnCheckedChangeListener?,
+    private val textChangedListener: TextWatcher?
 ) {
 
-    data class Builder(
-        private var questionID: String? = null,
-        private var questionType: QuestionTypeLocal? = null,
-        private var answers: List<QuestionAnswerLocal?>? = null
+    class ViewExtractor(
+        private val questionType: QuestionTypeLocal,
+        private val view: View?
     ) {
-        fun questionID(questionID: String): Builder {
-            this.questionID = questionID
-
-            return this
+        fun answer(): String {
+            return when (questionType) {
+                QuestionTypeLocal.SELECT -> viewSelect()
+                QuestionTypeLocal.TEXT -> viewText()
+            }
         }
 
-        fun questionType(questionType: QuestionTypeLocal): Builder {
-            this.questionType = questionType
-
-            return this
+        private fun viewSelect(): String {
+            return (view as RadioButton?)?.tag.toString()
         }
 
-        fun answers(answers: List<QuestionAnswerLocal?>?): Builder {
-            this.answers = answers
-
-            return this
+        private fun viewText(): String {
+            return (view as EditText?)?.text.toString()
         }
+    }
 
-        fun build(context: Context) =
-            DynamicQuestionView(context, questionID, questionType, answers)
+    data class Builder(
+        private val questionID: String? = null,
+        private val questionType: QuestionTypeLocal? = null,
+        private val answers: List<QuestionAnswerLocal?>? = null,
+        private val checkedChangeListener: CompoundButton.OnCheckedChangeListener? = null,
+        private val textChangedListener: TextWatcher? = null
+    ) {
+        fun build(context: Context) = DynamicQuestionView(
+            context,
+            questionID,
+            questionType,
+            answers,
+            checkedChangeListener,
+            textChangedListener
+        )
     }
 
     fun view(): View {
@@ -47,29 +61,23 @@ class DynamicQuestionView private constructor(
     }
 
     private fun viewFactory(): View {
-        if (questionType == null) {
-            throw NullPointerException("questionType must not be null")
-        }
-
         return when (questionType) {
             QuestionTypeLocal.SELECT -> viewTypeSelect()
             QuestionTypeLocal.TEXT -> viewTypeText()
+            null -> throw NullPointerException("questionType must not be null")
         }
     }
 
     private fun viewTypeSelect(): View {
-        if (answers.isNullOrEmpty()) {
-            throw NullPointerException("For type SELECT answers are required")
-        }
-
         val radioGroup: RadioGroup = RadioGroup(context).apply {
             tag = questionID
         }
 
-        answers.forEach {
+        answers?.forEach {
             val option: RadioButton = RadioButton(context).apply {
-                tag = it?.id
+                tag = it?.id ?: ""
                 text = it?.answer ?: ""
+                setOnCheckedChangeListener(checkedChangeListener)
             }
 
             radioGroup.addView(option)
@@ -81,6 +89,7 @@ class DynamicQuestionView private constructor(
     private fun viewTypeText(): View {
         return EditText(context).apply {
             tag = questionID
+            addTextChangedListener(textChangedListener)
         }
     }
 }

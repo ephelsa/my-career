@@ -23,6 +23,6 @@ interface SurveyDao {
     suspend fun insertQuestionAnswer(vararg questionAnswerEntity: QuestionAnswerEntity)
 
     @Transaction
-    @Query("SELECT * FROM question WHERE id IN (SELECT DISTINCT(question.id) FROM question_answer)")
+    @Query("SELECT * FROM question q WHERE id IN (SELECT DISTINCT(q.id) FROM question_answer) ORDER BY q.id ASC")
     suspend fun getQuestionsAndQuestionAnswers(): List<QuestionAndQuestionsAnswersRelation>
 }
