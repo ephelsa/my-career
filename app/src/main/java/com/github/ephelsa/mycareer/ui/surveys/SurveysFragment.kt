@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentSurveysBinding
 import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
+import com.github.ephelsa.mycareer.domain.user.UserRemote
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import com.github.ephelsa.mycareer.ui.utils.fullNamePresentation
 import com.github.ephelsa.mycareer.ui.utils.hasError
@@ -23,32 +23,32 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
     private val viewModel: SurveysViewModel by viewModels()
     private lateinit var surveyAdapter: SurveyAdapter
-    private val args: SurveysFragmentArgs by navArgs()
     private val directions = SurveysFragmentDirections
 
     companion object {
         private val TAG = SurveysFragment::class.java.simpleName
     }
 
-    private val surveys: () -> Unit = {
-        viewModel.surveys.handleObservable(
+    private val surveys: (UserRemote) -> Unit = {
+        viewModel.surveys(it).handleObservable(
             enableDefaultError = false,
-            onSuccess = {
-                viewModel.verifyListOfSurveys(it.data) // Verify to display or hide recycler
-                configureSurveyRecycler(it.data)
+            onSuccess = { response ->
+                viewModel.verifyListOfSurveys(response.data) // Verify to display or hide recycler
+                configureSurveyRecycler(response.data)
             }
         )
     }
 
-    private val userInformation: () -> Unit = {
-        viewModel.userInformationByEmail(args.email).handleObservable(
-            enableDefaultError = false,
+    private fun userInformation() {
+        viewModel.retrieveUserInformation.handleObservable(
             enableDefaultLoader = false,
+            enableDefaultError = false,
             onLoading = {
                 binding.userInformation.nameText.isLoading()
             },
             onSuccess = {
                 binding.userInformation.nameText.text = it.data.fullNamePresentation()
+                surveys(it.data.remoteTransform())
             },
             onError = {
                 binding.userInformation.nameText.hasError(getString(R.string.error_can_not_retrieve_information))
@@ -68,7 +68,6 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
         uiObservers()
         userInformation()
-        surveys()
         bindClickListener()
     }
 
@@ -88,6 +87,16 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
     }
 
     private fun configureSurveyRecycler(surveysRemote: List<SurveyRemote>) {
+        // Click event
+        val takeSurvey: (Int) -> Unit = { surveyCode ->
+            viewModel.surveyWithQuestions(surveyCode)
+                .handleObservable(
+                    onSuccess = {
+                        navigate(directions.questionFragment())
+                    }
+                )
+        }
+
         // Configure click actions
         surveyAdapter = SurveyAdapter(surveysRemote) { click ->
             takeSurvey(click.id)
@@ -99,15 +108,6 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@SurveysFragment.requireContext())
         }
-    }
-
-    private fun takeSurvey(surveyCode: Int) {
-        viewModel.surveyWithQuestions(surveyCode)
-            .handleObservable(
-                onSuccess = {
-                    navigate(directions.questionFragment())
-                }
-            )
     }
 
     override fun onClick(v: View?) {

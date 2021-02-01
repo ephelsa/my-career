@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentQuestionBinding
-import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,11 +55,10 @@ class QuestionFragment :
                 openQuestion()
                 handleQuestionCounter()
             } catch (e: Exception) {
-                val error = ErrorRemote(
-                    message = getString(R.string.error_questions_and_questions_answers_empty),
-                    details = getString(R.string.error_questions_and_questions_answers_empty)
+                displayError(
+                    title = getString(R.string.error_questions_and_questions_answers_empty),
+                    message = getString(R.string.error_questions_and_questions_answers_empty)
                 )
-                displayError(error)
             }
         }
 

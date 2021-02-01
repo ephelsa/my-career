@@ -41,10 +41,26 @@ class SurveyAdapter(
             else descriptionText.isVisible = false
             container.isEnabled = surveyRemote.isActive
             takeSurveyButton.isEnabled = surveyRemote.isActive
+            bindLoader(surveyRemote)
             bindClickListener()
         }
 
-        private fun bindClickListener(): Unit = with(binding) {
+        private fun CardSurveyItemBinding.bindLoader(surveyRemote: SurveyRemote) {
+            val total = surveyRemote.totalQuestions
+            val answered = surveyRemote.questionsAnswered
+
+            if (answered == null) {
+                completeProgress.isVisible = false
+            } else {
+                completeProgress.min = 0F
+                completeProgress.max = total.toFloat()
+                completeProgress.progress = answered.toFloat()
+                completeProgress.labelText = root.context
+                    .getString(R.string.label_questions_answered, answered, total)
+            }
+        }
+
+        private fun CardSurveyItemBinding.bindClickListener() {
             takeSurveyButton.setOnClickListener(this@ViewHolder)
         }
 

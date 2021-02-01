@@ -2,7 +2,6 @@ package com.github.ephelsa.mycareer.delivery.auth.local
 
 import com.github.ephelsa.mycareer.data.auth.AuthLocalDataSource
 import com.github.ephelsa.mycareer.delivery.auth.mapper.toDelivery
-import com.github.ephelsa.mycareer.delivery.auth.mapper.toDomain
 import com.github.ephelsa.mycareer.delivery.shared.local.LocalHandler.handleError
 import com.github.ephelsa.mycareer.delivery.shared.local.LocalHandler.handleSuccess
 import com.github.ephelsa.mycareer.domain.auth.AuthCredentialLocal

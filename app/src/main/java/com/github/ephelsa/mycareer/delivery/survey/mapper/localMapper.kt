@@ -16,16 +16,7 @@ fun QuestionAnswerLocal.toDelivery() = QuestionAnswerEntity(questionId, id, answ
 @JvmName("toDeliveryQuestionAnswerLocal")
 fun List<QuestionAnswerLocal>.toDelivery(): List<QuestionAnswerEntity> = map { it.toDelivery() }
 
-fun QuestionAnswerEntity.toDomain() = QuestionAnswerLocal(questionId, id, answer)
-
 fun List<QuestionAnswerEntity>.toDomain() = map { it.toDomain() }
-
-fun QuestionAndQuestionsAnswersRelation.toDomain() = QuestionAndQuestionsAnswersLocal(
-    questionId = questionEntity.id,
-    answers = questionAnswerEntity.map { it?.toDomain() },
-    type = questionEntity.type,
-    question = questionEntity.question
-)
 
 @JvmName("toDomainQuestionAndQuestionsAnswersRelation")
 fun List<QuestionAndQuestionsAnswersRelation>.toDomain(): List<QuestionAndQuestionsAnswersLocal> =

@@ -20,6 +20,7 @@
     <string name="label_start_forms">Puedes empezar llenando uno de estos formularios 👇</string>
     <string name="label_profiling">Perfilamiento</string>
     <string name="label_question_counter">Pregunta %d de %d</string>
+    <string name="label_questions_answered">%d de %d respondidas</string>
 
     <!-- hints -->
     <string name="hint_first_name">Primer nombre</string>
@@ -61,7 +62,7 @@
     <string name="error_password_match_length">Las contraseñas deben de ser iguales y tener un mínimo de %d caracteres</string>
     <string name="error_results_not_found">No se encontraron resultados :(</string>
     <string name="error_can_not_retrieve_information">No se pudo obtener información</string>
-    <string name="error_questions_and_questions_answers_empty">No se hay preguntas para cargar</string>
+    <string name="error_questions_and_questions_answers_empty">No hay preguntas para cargar</string>
 
     <!-- warning messages -->
     <string name="warning_work_in_progress">En proceso de construcción</string>

@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/start_text"
-        style="@style/Text.SubTitle"
+        style="@style/Text.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_big"
@@ -41,8 +41,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/surveys_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/content_top"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start_text" />

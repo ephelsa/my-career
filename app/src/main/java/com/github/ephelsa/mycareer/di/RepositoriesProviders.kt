@@ -15,6 +15,7 @@ import com.github.ephelsa.mycareer.delivery.location.remote.LocationRemoteReposi
 import com.github.ephelsa.mycareer.delivery.studylevel.remote.StudyLevelRemoteRepository
 import com.github.ephelsa.mycareer.delivery.survey.local.SurveyLocalRepository
 import com.github.ephelsa.mycareer.delivery.survey.remote.SurveyRemoteRepository
+import com.github.ephelsa.mycareer.delivery.user.local.UserLocalRepository
 import com.github.ephelsa.mycareer.delivery.user.remote.UserRemoteRepository
 import dagger.Module
 import dagger.Provides
@@ -59,6 +60,7 @@ object RepositoriesProviders {
 
     @Provides
     fun providesUserRepository(
-        userRemoteRepository: UserRemoteRepository
-    ): UserRepository = UserRepository(userRemoteRepository)
+        userRemoteRepository: UserRemoteRepository,
+        userLocalRepository: UserLocalRepository
+    ): UserRepository = UserRepository(userRemoteRepository, userLocalRepository)
 }

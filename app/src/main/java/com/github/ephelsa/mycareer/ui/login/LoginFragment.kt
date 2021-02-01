@@ -108,12 +108,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
     private fun login(credentialRemote: AuthCredentialRemote) {
         val successListener = object : DialogListener {
             override fun onClose(dialogFragment: DialogFragment) {
-                navigate(directions.surveysFragment(credentialRemote.email!!))
+                navigate(directions.surveysFragment())
             }
         }
 
+        val userInformation: () -> Unit = {
+            viewModel.downloadAndStoreUserInfoByEmail(credentialRemote.email!!)
+                .handleObservable(
+                    onSuccess = { displaySuccess(successListener) }
+                )
+        }
+
         viewModel.login(credentialRemote).handleObservable(
-            onSuccess = { displaySuccess(successListener) }
+            onSuccess = { userInformation() }
         )
     }
 

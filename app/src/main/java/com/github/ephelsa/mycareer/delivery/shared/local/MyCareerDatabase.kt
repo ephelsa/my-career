@@ -10,14 +10,17 @@ import com.github.ephelsa.mycareer.delivery.auth.local.AuthDao
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
 import com.github.ephelsa.mycareer.delivery.survey.local.SurveyDao
+import com.github.ephelsa.mycareer.delivery.user.entity.UserInfoEntity
+import com.github.ephelsa.mycareer.delivery.user.local.UserDao
 
 @Database(
     entities = [
         SessionEntity::class,
         QuestionEntity::class,
-        QuestionAnswerEntity::class
+        QuestionAnswerEntity::class,
+        UserInfoEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -42,4 +45,5 @@ abstract class MyCareerDatabase : RoomDatabase() {
 
     abstract fun authDao(): AuthDao
     abstract fun surveyDao(): SurveyDao
+    abstract fun userDao(): UserDao
 }

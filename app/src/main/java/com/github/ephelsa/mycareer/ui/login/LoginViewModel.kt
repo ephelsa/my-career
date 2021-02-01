@@ -9,21 +9,26 @@ import com.github.ephelsa.mycareer.domain.auth.AuthCredentialRemote
 import com.github.ephelsa.mycareer.ui.utils.ScopedViewModel
 import com.github.ephelsa.mycareer.usecase.auth.GetStoredCredentialsUseCase
 import com.github.ephelsa.mycareer.usecase.auth.LoginUseCase
+import com.github.ephelsa.mycareer.usecase.user.DownloadAndStoreUserInformationByEmailUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 
 class LoginViewModel @ViewModelInject constructor(
     uiDispatcher: CoroutineDispatcher,
     private val loginUseCase: LoginUseCase,
+    private val downloadAndStoreUserInformationByEmailUseCase: DownloadAndStoreUserInformationByEmailUseCase,
     getStoredCredentialsUseCase: GetStoredCredentialsUseCase
 ) : ScopedViewModel(uiDispatcher) {
 
     private val _ui = MutableLiveData<UI>()
     val ui: LiveData<UI> get() = _ui
 
+    val storedCredentials = getStoredCredentialsUseCase().asLiveData()
+
     fun login(authCredentialRemote: AuthCredentialRemote) =
         loginUseCase(authCredentialRemote).asLiveData()
 
-    val storedCredentials = getStoredCredentialsUseCase().asLiveData()
+    fun downloadAndStoreUserInfoByEmail(email: String) =
+        downloadAndStoreUserInformationByEmailUseCase(email).asLiveData()
 
     fun enableLoginButton(email: String, password: String, minPasswordSize: Int) {
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()

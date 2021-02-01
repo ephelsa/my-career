@@ -17,7 +17,6 @@ class LoginUseCase(
     operator fun invoke(authCredentialRemote: AuthCredentialRemote): Flow<ResourceRemote<AuthCredentialRemote>> =
         flow {
             emit(ResourceRemote.Loading())
-
             val remoteLogin = authRepository.login(authCredentialRemote)
 
             if (remoteLogin is ResourceRemote.Success) {

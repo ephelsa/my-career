@@ -29,6 +29,7 @@ allprojects {
 
             AppCompat          : '1.2.0',
             Material           : '1.2.1',
+            ProgressView       : '1.1.1',
             Lottie             : '3.5.0',
             ContraintLayout    : '2.0.4',
             NavigationComponent: '2.3.1',
@@ -86,7 +87,8 @@ allprojects {
 
         material = [
                 Material: "com.google.android.material:material:${versions.Material}",
-                Lottie  : "com.airbnb.android:lottie:${versions.Lottie}"
+                Lottie  : "com.airbnb.android:lottie:${versions.Lottie}",
+                ProgressView: "com.github.skydoves:progressview:${versions.ProgressView}"
         ]
 
         kapt = [

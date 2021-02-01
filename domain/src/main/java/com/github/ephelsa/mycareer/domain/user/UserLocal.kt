@@ -1,8 +1,8 @@
 package com.github.ephelsa.mycareer.domain.user
 
-import com.github.ephelsa.mycareer.domain.shared.RemoteMapper
+import com.github.ephelsa.mycareer.domain.shared.LocalMapper
 
-data class UserRemote(
+data class UserLocal(
     val firstName: String,
     val secondName: String?,
     val firstSurname: String,
@@ -10,8 +10,8 @@ data class UserRemote(
     val email: String,
     val documentType: String,
     val document: String,
-) : RemoteMapper<UserLocal> {
-    override fun localTransform(): UserLocal = UserLocal(
+) : LocalMapper<UserRemote> {
+    override fun remoteTransform(): UserRemote = UserRemote(
         firstName,
         secondName,
         firstSurname,

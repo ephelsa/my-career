@@ -15,7 +15,8 @@ import com.github.ephelsa.mycareer.usecase.location.DepartmentsByCountryUseCase
 import com.github.ephelsa.mycareer.usecase.location.MunicipalitiesByCountryAndDepartmentUseCase
 import com.github.ephelsa.mycareer.usecase.studylevel.StudyLevelsUseCase
 import com.github.ephelsa.mycareer.usecase.survey.*
-import com.github.ephelsa.mycareer.usecase.user.UserInformationByEmailUseCase
+import com.github.ephelsa.mycareer.usecase.user.DownloadAndStoreUserInformationByEmailUseCase
+import com.github.ephelsa.mycareer.usecase.user.RetrieveUserInformationUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,11 +71,6 @@ object UseCasesProviders {
     fun provideSurveysUseCase(
         surveyRepository: SurveyRepository
     ) = SurveysUseCase(surveyRepository)
-
-    @Provides
-    fun provideUserInformationByEmailUseCase(
-        userRepository: UserRepository
-    ) = UserInformationByEmailUseCase(userRepository)
 
     @Provides
     fun provideGetStoredCredentialsUseCase(
@@ -142,4 +138,14 @@ object UseCasesProviders {
     fun provideQuestionsAndQuestionsAnswersUseCase(
         surveyRepository: SurveyRepository
     ) = StoredQuestionsAndQuestionAnswersUseCase(surveyRepository)
+
+    @Provides
+    fun provideDownloadAndStoreUserInformationByEmailUseCase(
+        userRepository: UserRepository
+    ) = DownloadAndStoreUserInformationByEmailUseCase(userRepository)
+
+    @Provides
+    fun provideRetrieveUserInformationUseCase(
+        userRepository: UserRepository
+    ) = RetrieveUserInformationUseCase(userRepository)
 }

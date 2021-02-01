@@ -37,6 +37,7 @@
 
     <style name="Text.Body.Action">
         <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/blue_jeans</item>
     </style>
 

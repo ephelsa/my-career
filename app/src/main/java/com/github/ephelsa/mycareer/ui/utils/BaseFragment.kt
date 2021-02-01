@@ -10,13 +10,13 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.github.ephelsa.mycareer.domain.shared.ErrorRemote
 import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.ui.dialog.DialogListener
 import com.github.ephelsa.mycareer.ui.dialog.ErrorDialog
 import com.github.ephelsa.mycareer.ui.dialog.LoaderDialog
 import com.github.ephelsa.mycareer.ui.dialog.SuccessDialog
+import java.util.*
 
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     private var _binding: Binding? = null
@@ -28,6 +28,9 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
 
     companion object {
         private val TAG = BaseFragment::class.java.simpleName
+        private val LOADER_UUID = UUID.randomUUID().variant().toString()
+        private val SUCCESS_UUID = UUID.randomUUID().variant().toString()
+        private val ERROR_UUID = UUID.randomUUID().variant().toString()
     }
 
     abstract fun initializeBinding(inflater: LayoutInflater, container: ViewGroup?): Binding
@@ -43,7 +46,10 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun displayLoader() {
         try {
-            loaderDialog.show(parentFragmentManager, TAG)
+            if (loaderDialog.isAdded) {
+                loaderDialog.dismiss()
+            }
+            loaderDialog.show(parentFragmentManager, LOADER_UUID)
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
@@ -58,21 +64,27 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         successDialog.dialogListener = dialogListener
 
         try {
-            successDialog.show(parentFragmentManager, TAG)
+            if (successDialog.isAdded) {
+                successDialog.dismiss()
+            }
+            successDialog.show(parentFragmentManager, SUCCESS_UUID)
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
-    protected fun displayError(errorRemote: ErrorRemote) {
+    protected fun displayError(title: String, message: String) {
         errorDialog.apply {
-            errorTitle = errorRemote.message
-            errorMessage = errorRemote.details
+            errorTitle = title
+            errorMessage = message
         }
 
         try {
-            errorDialog.show(parentFragmentManager, TAG)
+            if (errorDialog.isAdded) {
+                errorDialog.dismiss()
+            }
+            errorDialog.show(parentFragmentManager, ERROR_UUID)
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
@@ -103,7 +115,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
                     if (enableDefaultLoader) hideLoader()
                     if (onError != null) onError(it)
                     if (onComplete != null) onComplete()
-                    if (enableDefaultError) displayError(it.error)
+                    if (enableDefaultError) displayError(it.error.message, it.error.details)
                 }
                 is ResourceRemote.Complete -> if (onComplete != null) onComplete()
             }
@@ -119,6 +131,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
 
         // Optionals
         enableDefaultLoader: Boolean = true,
+        enableDefaultError: Boolean = true
     ) {
         this.observe(viewLifecycleOwner) {
             when (it) {
@@ -135,6 +148,7 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
                     if (enableDefaultLoader) hideLoader()
                     if (onError != null) onError(it)
                     if (onComplete != null) onComplete()
+                    if (enableDefaultError) displayError(it.error.toString(), it.error.toString())
                 }
                 is ResourceLocal.Complete -> if (onComplete != null) onComplete()
             }

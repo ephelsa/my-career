@@ -2,7 +2,7 @@ package com.github.ephelsa.mycareer.ui.utils
 
 import android.widget.TextView
 import com.github.ephelsa.mycareer.R
-import com.github.ephelsa.mycareer.domain.user.UserRemote
+import com.github.ephelsa.mycareer.domain.user.UserLocal
 import com.google.android.material.textfield.TextInputLayout
 
 fun TextInputLayout.isLoading(isLoading: Boolean, message: String? = null) {
@@ -25,8 +25,8 @@ fun TextView.hasError(message: String) {
     this.text = message
 }
 
-fun UserRemote.fullNamePresentation(): String {
-    val mSecondName = secondName.takeIf { secondName.isNotEmpty() }?.get(0)?.plus(".") ?: ""
+fun UserLocal.fullNamePresentation(): String {
+    val mSecondName = secondName.takeIf { !secondName.isNullOrEmpty() }?.get(0)?.plus(".") ?: ""
     val names = "$firstName $mSecondName".trim()
     val surnames = "$firstSurname $secondSurname".trim()
 

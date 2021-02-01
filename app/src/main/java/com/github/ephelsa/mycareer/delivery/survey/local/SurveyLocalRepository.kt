@@ -12,7 +12,9 @@ import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SurveyLocalRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val surveyDao: SurveyDao

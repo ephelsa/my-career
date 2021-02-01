@@ -4,6 +4,7 @@ import android.content.Context
 import com.github.ephelsa.mycareer.delivery.auth.local.AuthDao
 import com.github.ephelsa.mycareer.delivery.shared.local.MyCareerDatabase
 import com.github.ephelsa.mycareer.delivery.survey.local.SurveyDao
+import com.github.ephelsa.mycareer.delivery.user.local.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +31,9 @@ object DatabaseProviders {
     fun provideSurveyDao(
         myCareerDatabase: MyCareerDatabase
     ): SurveyDao = myCareerDatabase.surveyDao()
+
+    @Provides
+    fun provideUserDao(
+        myCareerDatabase: MyCareerDatabase
+    ): UserDao = myCareerDatabase.userDao()
 }

@@ -5,29 +5,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
+import com.github.ephelsa.mycareer.domain.user.UserRemote
 import com.github.ephelsa.mycareer.ui.utils.ScopedViewModel
 import com.github.ephelsa.mycareer.usecase.auth.DeleteStoredSessionsUseCase
 import com.github.ephelsa.mycareer.usecase.survey.SurveyWithQuestionsUseCase
 import com.github.ephelsa.mycareer.usecase.survey.SurveysUseCase
-import com.github.ephelsa.mycareer.usecase.user.UserInformationByEmailUseCase
+import com.github.ephelsa.mycareer.usecase.user.RetrieveUserInformationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 
 class SurveysViewModel @ViewModelInject constructor(
     uiDispatcher: CoroutineDispatcher,
-    surveysUseCase: SurveysUseCase,
-    private val userInformationByEmailUseCase: UserInformationByEmailUseCase,
+    private val surveysUseCase: SurveysUseCase,
     private val surveyWithQuestionsUseCase: SurveyWithQuestionsUseCase,
-    deleteStoredSessionsUseCase: DeleteStoredSessionsUseCase
+    deleteStoredSessionsUseCase: DeleteStoredSessionsUseCase,
+    retrieveUserInformationUseCase: RetrieveUserInformationUseCase
 ) : ScopedViewModel(uiDispatcher) {
 
     private val _showSurveyRecycler = MutableLiveData<Boolean>()
     val showSurveyRecycler: LiveData<Boolean> get() = _showSurveyRecycler
 
-    val surveys = surveysUseCase().asLiveData()
+    fun surveys(userRemote: UserRemote) = surveysUseCase(userRemote).asLiveData()
+
+    val retrieveUserInformation = retrieveUserInformationUseCase().asLiveData()
 
     val deleteStoredSessions = deleteStoredSessionsUseCase().asLiveData()
-
-    fun userInformationByEmail(email: String) = userInformationByEmailUseCase(email).asLiveData()
 
     fun surveyWithQuestions(surveyCode: Int) = surveyWithQuestionsUseCase(surveyCode).asLiveData()
 
