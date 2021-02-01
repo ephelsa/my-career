@@ -9,6 +9,7 @@ import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -66,6 +67,16 @@ class SurveyLocalRepository @Inject constructor(
                 handleSuccess(operation.toDomain())
             } catch (e: Exception) {
                 handleError<List<QuestionAndQuestionsAnswersLocal>>(e)
+            }
+        }
+
+    override suspend fun storeUserAnswer(userAnswerLocal: UserAnswerLocal): ResourceLocal<Unit> =
+        withContext(dispatcher) {
+            try {
+                val operation = surveyDao.insertUserAnswer(userAnswerLocal.toDelivery())
+                handleSuccess(operation)
+            } catch (e: Exception) {
+                handleError<Unit>(e)
             }
         }
 }

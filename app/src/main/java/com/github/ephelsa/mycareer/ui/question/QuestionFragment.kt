@@ -8,9 +8,11 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.github.ephelsa.mycareer.R
 import com.github.ephelsa.mycareer.databinding.FragmentQuestionBinding
 import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 import com.github.ephelsa.mycareer.ui.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,7 @@ class QuestionFragment :
 
     private val viewModel: QuestionViewModel by viewModels()
     private lateinit var questionsAndQuestionsAnswers: List<QuestionAndQuestionsAnswersLocal>
+    private val args: QuestionFragmentArgs by navArgs()
     private var currentQuestionPos: Int = 0
 
     override fun initializeBinding(
@@ -45,6 +48,7 @@ class QuestionFragment :
         nextButton.setOnClickListener(this@QuestionFragment)
         beforeButton.setOnClickListener(this@QuestionFragment)
         resultsButton.setOnClickListener(this@QuestionFragment)
+        errorLayout.closeButton.setOnClickListener(this@QuestionFragment)
     }
 
     private fun retrieveQuestionsAndQuestionsAnswers() {
@@ -107,11 +111,38 @@ class QuestionFragment :
         handleViewResults(isEnd && isValid)
     }
 
+    private fun storeAnswer(
+        answer: String,
+        isValid: Boolean,
+        question: QuestionAndQuestionsAnswersLocal
+    ) {
+        val userAnswerLocal = UserAnswerLocal(
+            surveyID = args.surveyID.toString(),
+            questionID = question.questionId.toString(),
+            answer = answer,
+            resolveAttempt = args.resolveAttempt
+        )
+
+        viewModel.storeUserAnswer(userAnswerLocal, isValid)
+            ?.handleObservable(
+                enableDefaultLoader = false,
+                enableDefaultError = false,
+                onSuccess = { handleButtonEnableBounds(isValid) },
+                onError = { handleError(it.error.toString()) }
+            )
+    }
+
+    private fun handleError(message: String) {
+        binding.errorContainer.isVisible = true
+        binding.errorLayout.errorText.text = message
+    }
+
     override fun onClick(v: View?) {
         when (v) {
             binding.nextButton -> performNextQuestion()
             binding.beforeButton -> performLastQuestion()
             binding.resultsButton -> performResults()
+            binding.errorLayout.closeButton -> performCloseError()
         }
     }
 
@@ -133,7 +164,15 @@ class QuestionFragment :
         ).show()
     }
 
-    override fun onAnswered(answer: String, isValid: Boolean) {
-        handleButtonEnableBounds(isValid)
+    private fun performCloseError() {
+        binding.errorContainer.isVisible = false
+    }
+
+    override fun onAnswered(
+        answer: String,
+        isValid: Boolean,
+        question: QuestionAndQuestionsAnswersLocal
+    ) {
+        storeAnswer(answer, isValid, question)
     }
 }

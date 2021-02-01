@@ -3,9 +3,11 @@ package com.github.ephelsa.mycareer.delivery.survey.mapper
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAndQuestionsAnswersRelation
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
+import com.github.ephelsa.mycareer.delivery.survey.entity.UserAnswerEntity
 import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 
 fun QuestionLocal.toDelivery() = QuestionEntity(id, question, type)
 
@@ -21,3 +23,5 @@ fun List<QuestionAnswerEntity>.toDomain() = map { it.toDomain() }
 @JvmName("toDomainQuestionAndQuestionsAnswersRelation")
 fun List<QuestionAndQuestionsAnswersRelation>.toDomain(): List<QuestionAndQuestionsAnswersLocal> =
     map { it.toDomain() }
+
+fun UserAnswerLocal.toDelivery() = UserAnswerEntity(surveyID, questionID, answer, resolveAttempt)

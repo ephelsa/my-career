@@ -27,6 +27,7 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
     companion object {
         private val TAG = SurveysFragment::class.java.simpleName
+        private const val DEFAULT_RESOLVE_ATTEMPT = 1
     }
 
     private val surveys: (UserRemote) -> Unit = {
@@ -88,18 +89,18 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
     private fun configureSurveyRecycler(surveysRemote: List<SurveyRemote>) {
         // Click event
-        val takeSurvey: (Int) -> Unit = { surveyCode ->
+        val takeSurvey: (Int, Int) -> Unit = { surveyCode, resolveAttempt ->
             viewModel.surveyWithQuestions(surveyCode)
                 .handleObservable(
                     onSuccess = {
-                        navigate(directions.questionFragment())
+                        navigate(directions.questionFragment(surveyCode, resolveAttempt))
                     }
                 )
         }
 
         // Configure click actions
         surveyAdapter = SurveyAdapter(surveysRemote) { click ->
-            takeSurvey(click.id)
+            takeSurvey(click.id, click.resolveAttempt ?: DEFAULT_RESOLVE_ATTEMPT)
         }
 
         // Configure recycler

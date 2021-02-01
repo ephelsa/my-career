@@ -43,5 +43,12 @@
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.github.ephelsa.mycareer.ui.question.QuestionFragment"
-        android:label="QuestionFragment" />
+        android:label="QuestionFragment" >
+        <argument
+            android:name="surveyID"
+            app:argType="integer" />
+        <argument
+            android:name="resolveAttempt"
+            app:argType="integer" />
+    </fragment>
 </navigation>

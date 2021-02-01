@@ -5,7 +5,7 @@ data class SurveyRemote(
     val name: String,
     val description: String?,
     val isActive: Boolean,
-    val resolveAttempts: Int?,
+    val resolveAttempt: Int?,
     val questionsAnswered: Int?,
     val totalQuestions: Int
 )

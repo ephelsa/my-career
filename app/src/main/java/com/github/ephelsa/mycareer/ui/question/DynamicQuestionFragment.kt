@@ -29,7 +29,7 @@ class DynamicQuestionFragment private constructor(
     }
 
     fun interface AnsweredListener {
-        fun onAnswered(answer: String, isValid: Boolean)
+        fun onAnswered(answer: String, isValid: Boolean, question: QuestionAndQuestionsAnswersLocal)
     }
 
     override fun initializeBinding(
@@ -62,7 +62,7 @@ class DynamicQuestionFragment private constructor(
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         val answer = DynamicQuestionView.ViewExtractor(question.type, buttonView)
-        answeredListener.onAnswered(answer.answer(), isValid = true)
+        answeredListener.onAnswered(answer.answer(), isValid = true, question = question)
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -70,7 +70,7 @@ class DynamicQuestionFragment private constructor(
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        answeredListener.onAnswered(s.toString(), isValid = !s.isNullOrEmpty())
+        answeredListener.onAnswered(s.toString(), isValid = !s.isNullOrEmpty(), question = question)
     }
 
     override fun afterTextChanged(s: Editable?) {

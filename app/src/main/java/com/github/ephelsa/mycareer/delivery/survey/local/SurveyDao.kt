@@ -1,12 +1,10 @@
 package com.github.ephelsa.mycareer.delivery.survey.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAndQuestionsAnswersRelation
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
+import com.github.ephelsa.mycareer.delivery.survey.entity.UserAnswerEntity
 
 @Dao
 interface SurveyDao {
@@ -25,4 +23,7 @@ interface SurveyDao {
     @Transaction
     @Query("SELECT * FROM question q WHERE id IN (SELECT DISTINCT(q.id) FROM question_answer) ORDER BY q.id ASC")
     suspend fun getQuestionsAndQuestionAnswers(): List<QuestionAndQuestionsAnswersRelation>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUserAnswer(userAnswerEntity: UserAnswerEntity)
 }

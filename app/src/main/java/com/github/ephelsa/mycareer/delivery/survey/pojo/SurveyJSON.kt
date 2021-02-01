@@ -9,7 +9,7 @@ data class SurveyJSON(
     @SerializedName("survey_name") val name: String,
     @SerializedName("description") val description: String?,
     @SerializedName("is_active") val isActive: Boolean,
-    @SerializedName("resolve_attempt") val resolveAttempts: Int?,
+    @SerializedName("resolve_attempt") val resolveAttempt: Int?,
     @SerializedName("questions_answered") val questionsAnswered: Int?,
     @SerializedName("total_questions") val totalQuestions: Int
 ) : DomainMappable<SurveyRemote> {
@@ -18,7 +18,7 @@ data class SurveyJSON(
         name,
         description,
         isActive,
-        resolveAttempts,
+        resolveAttempt,
         questionsAnswered,
         totalQuestions
     )

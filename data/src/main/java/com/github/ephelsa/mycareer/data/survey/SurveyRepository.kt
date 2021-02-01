@@ -2,6 +2,7 @@ package com.github.ephelsa.mycareer.data.survey
 
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 import com.github.ephelsa.mycareer.domain.user.UserRemote
 
 class SurveyRepository(
@@ -24,4 +25,7 @@ class SurveyRepository(
         surveyLocalDataSource.storeQuestionsAnswers(questionsAnswersLocal)
 
     suspend fun getQuestionsAndAnswers() = surveyLocalDataSource.getQuestionsAndAnswers()
+
+    suspend fun storeUserAnswer(userAnswerLocal: UserAnswerLocal) =
+        surveyLocalDataSource.storeUserAnswer(userAnswerLocal)
 }

@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import com.github.ephelsa.mycareer.delivery.auth.entity.SessionEntity
 import com.github.ephelsa.mycareer.delivery.auth.local.AuthDao
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionEntity
+import com.github.ephelsa.mycareer.delivery.survey.entity.UserAnswerEntity
 import com.github.ephelsa.mycareer.delivery.survey.local.SurveyDao
 import com.github.ephelsa.mycareer.delivery.user.entity.UserInfoEntity
 import com.github.ephelsa.mycareer.delivery.user.local.UserDao
@@ -18,9 +20,10 @@ import com.github.ephelsa.mycareer.delivery.user.local.UserDao
         SessionEntity::class,
         QuestionEntity::class,
         QuestionAnswerEntity::class,
-        UserInfoEntity::class
+        UserInfoEntity::class,
+        UserAnswerEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -39,6 +42,7 @@ abstract class MyCareerDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): MyCareerDatabase {
             return Room.databaseBuilder(context, MyCareerDatabase::class.java, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }
