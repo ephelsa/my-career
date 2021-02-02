@@ -1,10 +1,13 @@
 package com.github.ephelsa.mycareer.delivery.survey.remote
 
+import com.github.ephelsa.mycareer.delivery.shared.remote.json.StatusResponseJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrappedListResponseJSON
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrappedResponseJSON
 import com.github.ephelsa.mycareer.delivery.survey.pojo.SurveyJSON
 import com.github.ephelsa.mycareer.delivery.survey.pojo.SurveyWithQuestionsJSON
+import com.github.ephelsa.mycareer.delivery.survey.pojo.UserAnswerJSON
 import com.github.ephelsa.mycareer.delivery.user.pojo.UserJSON
+import com.github.ephelsa.mycareer.domain.shared.StatusRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyWithQuestionsRemote
 import retrofit2.http.Body
@@ -22,4 +25,9 @@ interface SurveyService {
     suspend fun surveyWithQuestions(
         @Path("id") id: Int
     ): WrappedResponseJSON<SurveyWithQuestionsRemote, SurveyWithQuestionsJSON>
+
+    @POST("survey/bulk-answers")
+    suspend fun sendBulkUserAnswers(
+        @Body listUserAnswerJSON: List<UserAnswerJSON>
+    ): WrappedResponseJSON<StatusRemote, StatusResponseJSON>
 }

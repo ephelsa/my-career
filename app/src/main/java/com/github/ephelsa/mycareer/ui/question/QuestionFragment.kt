@@ -28,8 +28,12 @@ class QuestionFragment :
 
     private val viewModel: QuestionViewModel by viewModels()
     private lateinit var questionsAndQuestionsAnswers: List<QuestionAndQuestionsAnswersLocal>
+    private val directions = QuestionFragmentDirections
     private val args: QuestionFragmentArgs by navArgs()
     private var currentQuestionPos: Int = 0
+
+    private val resolveAttempt = args.resolveAttempt
+    private val surveyId = args.surveyID.toString()
 
     override fun initializeBinding(
         inflater: LayoutInflater,
@@ -87,8 +91,8 @@ class QuestionFragment :
 
     private fun configureToolbar() {
         binding.toolbar.titleToolbarText.text = getString(R.string.label_profiling)
-        binding.toolbar.logoutButton.text = getString(R.string.button_home)
-        binding.toolbar.logoutButton.setOnClickListener {
+        binding.toolbar.actionButton.text = getString(R.string.button_home)
+        binding.toolbar.actionButton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -117,10 +121,10 @@ class QuestionFragment :
         question: QuestionAndQuestionsAnswersLocal
     ) {
         val userAnswerLocal = UserAnswerLocal(
-            surveyID = args.surveyID.toString(),
+            surveyID = surveyId,
             questionID = question.questionId.toString(),
             answer = answer,
-            resolveAttempt = args.resolveAttempt
+            resolveAttempt = resolveAttempt
         )
 
         viewModel.storeUserAnswer(userAnswerLocal, isValid)
@@ -157,11 +161,12 @@ class QuestionFragment :
     }
 
     private fun performResults() {
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.warning_work_in_progress),
-            Toast.LENGTH_LONG
-        ).show()
+        viewModel.sendStoredUserAnswers(surveyId, resolveAttempt)
+            .handleObservable(
+                onSuccess = {
+                    navigate(directions.actionQuestionFragmentToResultFragment(surveyId, resolveAttempt))
+                }
+            )
     }
 
     private fun performCloseError() {

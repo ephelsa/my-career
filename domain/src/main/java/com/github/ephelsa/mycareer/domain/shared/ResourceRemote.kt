@@ -1,6 +1,6 @@
 package com.github.ephelsa.mycareer.domain.shared
 
-sealed class ResourceRemote<T : Any>(
+sealed class ResourceRemote<T : Any?>(
     private val remoteStatus: StatusRemote? = null,
     private val remoteData: T? = null,
     private val remoteError: ErrorRemote? = null,

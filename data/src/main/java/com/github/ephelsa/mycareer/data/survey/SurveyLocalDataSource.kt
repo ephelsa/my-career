@@ -3,8 +3,8 @@ package com.github.ephelsa.mycareer.data.survey
 import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAndQuestionsAnswersLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
-import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 
 interface SurveyLocalDataSource {
     suspend fun deleteQuestions(): ResourceLocal<Unit>
@@ -16,4 +16,8 @@ interface SurveyLocalDataSource {
     suspend fun getQuestionsAndAnswers(): ResourceLocal<List<QuestionAndQuestionsAnswersLocal>>
 
     suspend fun storeUserAnswer(userAnswerLocal: UserAnswerLocal): ResourceLocal<Unit>
+    suspend fun getUserAnswers(
+        surveyId: String,
+        resolveAttempt: Int
+    ): ResourceLocal<List<UserAnswerLocal>>
 }

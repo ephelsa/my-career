@@ -50,5 +50,24 @@
         <argument
             android:name="resolveAttempt"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_questionFragment_to_resultFragment"
+            app:destination="@id/resultFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.github.ephelsa.mycareer.ui.result.ResultFragment"
+        android:label="ResultFragment" >
+        <argument
+            android:name="surveyID"
+            app:argType="string" />
+        <argument
+            android:name="resolveAttempt"
+            app:argType="integer" />
+        <action
+            android:id="@+id/resultFragment_to_surveysFragment"
+            app:destination="@id/surveysFragment" />
     </fragment>
 </navigation>

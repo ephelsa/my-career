@@ -73,7 +73,7 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
     }
 
     private fun bindClickListener() {
-        binding.toolbar.logoutButton.setOnClickListener(this)
+        binding.toolbar.actionButton.setOnClickListener(this)
     }
 
     private fun uiObservers() {
@@ -89,19 +89,32 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
     private fun configureSurveyRecycler(surveysRemote: List<SurveyRemote>) {
         // Click event
-        val takeSurvey: (Int, Int) -> Unit = { surveyCode, resolveAttempt ->
-            viewModel.surveyWithQuestions(surveyCode)
+        val takeSurvey: (SurveyRemote) -> Unit = { s ->
+            viewModel.surveyWithQuestions(s.id)
                 .handleObservable(
                     onSuccess = {
-                        navigate(directions.questionFragment(surveyCode, resolveAttempt))
+                        val resolveAttempt = s.resolveAttempt ?: DEFAULT_RESOLVE_ATTEMPT
+                        navigate(directions.questionFragment(s.id, resolveAttempt))
+                    }
+                )
+        }
+
+        val takeAgain: (SurveyRemote) -> Unit = { s ->
+            viewModel.surveyWithQuestions(s.id)
+                .handleObservable(
+                    onSuccess = {
+                        val resolveAttempt = (s.resolveAttempt ?: DEFAULT_RESOLVE_ATTEMPT) + 1
+                        navigate(directions.questionFragment(s.id, resolveAttempt))
                     }
                 )
         }
 
         // Configure click actions
-        surveyAdapter = SurveyAdapter(surveysRemote) { click ->
-            takeSurvey(click.id, click.resolveAttempt ?: DEFAULT_RESOLVE_ATTEMPT)
-        }
+        surveyAdapter = SurveyAdapter(
+            surveysRemote,
+            takeSurveyClick = takeSurvey,
+            takeAgainClick = takeAgain
+        )
 
         // Configure recycler
         binding.surveysRecycler.apply {
@@ -113,7 +126,7 @@ class SurveysFragment : BaseFragment<FragmentSurveysBinding>(), View.OnClickList
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.toolbar.logoutButton -> performLogout()
+            binding.toolbar.actionButton -> performLogout()
         }
     }
 

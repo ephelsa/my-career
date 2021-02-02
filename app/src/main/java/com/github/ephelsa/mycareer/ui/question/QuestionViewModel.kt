@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import com.github.ephelsa.mycareer.domain.shared.ResourceLocal
 import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
 import com.github.ephelsa.mycareer.ui.utils.ScopedViewModel
+import com.github.ephelsa.mycareer.usecase.survey.SendStoredUserAnswersUseCase
 import com.github.ephelsa.mycareer.usecase.survey.StoreUserAnswerUseCase
 import com.github.ephelsa.mycareer.usecase.survey.StoredQuestionsAndQuestionAnswersUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,6 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 class QuestionViewModel @ViewModelInject constructor(
     storedQuestionsAndQuestionAnswersUseCase: StoredQuestionsAndQuestionAnswersUseCase,
     private val storeUserAnswerUseCase: StoreUserAnswerUseCase,
+    private val sendStoredUserAnswersUseCase: SendStoredUserAnswersUseCase,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
@@ -24,4 +26,7 @@ class QuestionViewModel @ViewModelInject constructor(
     ): LiveData<ResourceLocal<Unit>>? {
         return storeUserAnswerUseCase(userAnswerLocal).asLiveData().takeIf { isValid }
     }
+
+    fun sendStoredUserAnswers(surveyId: String, resolveAttempt: Int) =
+        sendStoredUserAnswersUseCase(surveyId, resolveAttempt).asLiveData()
 }

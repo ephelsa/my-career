@@ -29,6 +29,9 @@ data class UserAnswerEntity(
     }
 
     override fun toDomain(): UserAnswerLocal = UserAnswerLocal(
-        surveyID, questionID, answer, resolveAttempt
+        surveyID,
+        questionID,
+        answer,
+        resolveAttempt
     )
 }

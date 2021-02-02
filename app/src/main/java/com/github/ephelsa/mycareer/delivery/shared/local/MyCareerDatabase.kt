@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
 import com.github.ephelsa.mycareer.delivery.auth.entity.SessionEntity
 import com.github.ephelsa.mycareer.delivery.auth.local.AuthDao
 import com.github.ephelsa.mycareer.delivery.survey.entity.QuestionAnswerEntity

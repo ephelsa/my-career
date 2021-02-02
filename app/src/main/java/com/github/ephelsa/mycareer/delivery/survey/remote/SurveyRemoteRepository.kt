@@ -4,10 +4,13 @@ import com.github.ephelsa.mycareer.data.survey.SurveyRemoteDataSource
 import com.github.ephelsa.mycareer.delivery.shared.mapper.toDomain
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler.handleError
 import com.github.ephelsa.mycareer.delivery.shared.remote.json.WrapperRemoteHandler.handleSuccess
+import com.github.ephelsa.mycareer.delivery.survey.mapper.toDelivery
 import com.github.ephelsa.mycareer.delivery.user.mapper.toDelivery
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
+import com.github.ephelsa.mycareer.domain.shared.StatusRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
 import com.github.ephelsa.mycareer.domain.survey.SurveyWithQuestionsRemote
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerRemote
 import com.github.ephelsa.mycareer.domain.user.UserRemote
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -20,14 +23,15 @@ class SurveyRemoteRepository @Inject constructor(
     private val surveyService: SurveyService
 ) : SurveyRemoteDataSource {
 
-    override suspend fun surveys(userRemote: UserRemote): ResourceRemote<List<SurveyRemote>> = withContext(dispatcher) {
-        try {
-            val responseJSON = surveyService.surveys(userRemote.toDelivery())
-            handleSuccess(responseJSON.toDomain())
-        } catch (e: Exception) {
-            handleError<List<SurveyRemote>>(e)
+    override suspend fun surveys(userRemote: UserRemote): ResourceRemote<List<SurveyRemote>> =
+        withContext(dispatcher) {
+            try {
+                val responseJSON = surveyService.surveys(userRemote.toDelivery())
+                handleSuccess(responseJSON.toDomain())
+            } catch (e: Exception) {
+                handleError<List<SurveyRemote>>(e)
+            }
         }
-    }
 
     override suspend fun surveyWithQuestions(surveyCode: Int): ResourceRemote<SurveyWithQuestionsRemote> =
         withContext(dispatcher) {
@@ -36,6 +40,16 @@ class SurveyRemoteRepository @Inject constructor(
                 handleSuccess(responseJSON.toDomain())
             } catch (e: Exception) {
                 handleError<SurveyWithQuestionsRemote>(e)
+            }
+        }
+
+    override suspend fun sendUserAnswers(listUserRemote: List<UserAnswerRemote>): ResourceRemote<StatusRemote> =
+        withContext(dispatcher) {
+            try {
+                val responseJSON = surveyService.sendBulkUserAnswers(listUserRemote.toDelivery())
+                handleSuccess(responseJSON.toDomain())
+            } catch (e: Exception) {
+                handleError<StatusRemote>(e)
             }
         }
 }

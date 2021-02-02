@@ -65,6 +65,19 @@
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24"
             app:drawableTint="@color/blue_jeans" />
 
+        <TextView
+            android:id="@+id/take_again_button"
+            style="@style/Text.Body.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/take_survey_button"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:drawablePadding="@dimen/spacing_small"
+            android:text="@string/button_take_again_survey"
+            app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:drawableTint="@color/blue_jeans" />
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

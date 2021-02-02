@@ -63,7 +63,7 @@ class SurveyLocalRepository @Inject constructor(
     override suspend fun getQuestionsAndAnswers(): ResourceLocal<List<QuestionAndQuestionsAnswersLocal>> =
         withContext(dispatcher) {
             try {
-                val operation = surveyDao.getQuestionsAndQuestionAnswers()
+                val operation = surveyDao.selectQuestionsAndQuestionAnswers()
                 handleSuccess(operation.toDomain())
             } catch (e: Exception) {
                 handleError<List<QuestionAndQuestionsAnswersLocal>>(e)
@@ -79,4 +79,18 @@ class SurveyLocalRepository @Inject constructor(
                 handleError<Unit>(e)
             }
         }
+
+    override suspend fun getUserAnswers(
+        surveyId: String,
+        resolveAttempt: Int
+    ): ResourceLocal<List<UserAnswerLocal>> = withContext(dispatcher) {
+        try {
+            val operation = surveyDao
+                .selectAllUserAnswersBySurveyAndResolveAttempt(surveyId, resolveAttempt)
+                .toDomain()
+            handleSuccess(operation)
+        } catch (e: Exception) {
+            handleError<List<UserAnswerLocal>>(e)
+        }
+    }
 }

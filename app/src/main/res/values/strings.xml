@@ -7,6 +7,7 @@
     <string name="button_login">Inicia sesión</string>
     <string name="button_registry">Regístrate</string>
     <string name="button_take_survey">Iniciar cuestionario</string>
+    <string name="button_take_again_survey">Realizar nuevamente</string>
     <string name="button_logout">Cerrar sesión</string>
     <string name="button_home">Ir al inicio</string>
     <string name="button_next">Siguiente pregunta</string>

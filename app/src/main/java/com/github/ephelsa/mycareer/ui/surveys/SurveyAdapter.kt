@@ -12,7 +12,8 @@ import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
 
 class SurveyAdapter(
     private val surveysRemote: List<SurveyRemote>,
-    private val takeSurveyClick: (SurveyRemote) -> Unit
+    private val takeSurveyClick: (SurveyRemote) -> Unit,
+    private val takeAgainClick: (SurveyRemote) -> Unit,
 ) : RecyclerView.Adapter<SurveyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyAdapter.ViewHolder {
@@ -41,9 +42,16 @@ class SurveyAdapter(
             if (surveyRemote.description != null) descriptionText.text = surveyRemote.description
             else descriptionText.isVisible = false
             container.isEnabled = surveyRemote.isActive
-            takeSurveyButton.isEnabled = surveyRemote.isActive
+            bindButton(surveyRemote)
             bindLoader(surveyRemote)
             bindClickListener()
+        }
+
+        private fun CardSurveyItemBinding.bindButton(surveyRemote: SurveyRemote) {
+            val isSurveyIncomplete =
+                surveyRemote.totalQuestions - (surveyRemote.questionsAnswered ?: 0) > 0
+            takeSurveyButton.isVisible = surveyRemote.isActive && isSurveyIncomplete
+            takeAgainButton.isVisible = surveyRemote.isActive && !isSurveyIncomplete
         }
 
         private fun CardSurveyItemBinding.bindLoader(surveyRemote: SurveyRemote) {
@@ -79,16 +87,22 @@ class SurveyAdapter(
 
         private fun CardSurveyItemBinding.bindClickListener() {
             takeSurveyButton.setOnClickListener(this@ViewHolder)
+            takeAgainButton.setOnClickListener(this@ViewHolder)
         }
 
         override fun onClick(v: View?): Unit = with(binding) {
             when (v) {
                 takeSurveyButton -> performTakeSurvey()
+                takeAgainButton -> performTakeAgainSurvey()
             }
         }
 
         private fun performTakeSurvey() {
             takeSurveyClick(surveysRemote[adapterPosition])
+        }
+
+        private fun performTakeAgainSurvey() {
+            takeAgainClick(surveysRemote[adapterPosition])
         }
     }
 }

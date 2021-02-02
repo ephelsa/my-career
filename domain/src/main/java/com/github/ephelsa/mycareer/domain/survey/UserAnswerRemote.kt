@@ -6,5 +6,6 @@ data class UserAnswerRemote(
     val document: String,
     val surveyId: Int,
     val questionId: Int,
-    val answer: String?
+    val answer: String?,
+    val resolveAttempt: Int
 )

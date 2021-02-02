@@ -153,4 +153,10 @@ object UseCasesProviders {
     fun provideStoreUserAnswerUseCase(
         surveyRepository: SurveyRepository
     ) = StoreUserAnswerUseCase(surveyRepository)
+
+    @Provides
+    fun provideSendStoredUserAnswersUseCase(
+        surveyRepository: SurveyRepository,
+        retrieveUserInformationUseCase: RetrieveUserInformationUseCase
+    ) = SendStoredUserAnswersUseCase(surveyRepository, retrieveUserInformationUseCase)
 }

@@ -22,8 +22,14 @@ interface SurveyDao {
 
     @Transaction
     @Query("SELECT * FROM question q WHERE id IN (SELECT DISTINCT(q.id) FROM question_answer) ORDER BY q.id ASC")
-    suspend fun getQuestionsAndQuestionAnswers(): List<QuestionAndQuestionsAnswersRelation>
+    suspend fun selectQuestionsAndQuestionAnswers(): List<QuestionAndQuestionsAnswersRelation>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserAnswer(userAnswerEntity: UserAnswerEntity)
+
+    @Query("SELECT * FROM user_answer WHERE survey_id = :surveyId AND resolve_attempt = :resolveAttempt")
+    suspend fun selectAllUserAnswersBySurveyAndResolveAttempt(
+        surveyId: String,
+        resolveAttempt: Int
+    ): List<UserAnswerEntity>
 }

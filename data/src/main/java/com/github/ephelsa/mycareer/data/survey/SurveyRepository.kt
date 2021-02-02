@@ -3,6 +3,7 @@ package com.github.ephelsa.mycareer.data.survey
 import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
 import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
 import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
+import com.github.ephelsa.mycareer.domain.survey.UserAnswerRemote
 import com.github.ephelsa.mycareer.domain.user.UserRemote
 
 class SurveyRepository(
@@ -13,6 +14,9 @@ class SurveyRepository(
 
     suspend fun surveyWithQuestions(surveyCode: Int) =
         surveyRemoteDataSource.surveyWithQuestions(surveyCode)
+
+    suspend fun sendUserAnswers(listUserRemote: List<UserAnswerRemote>) =
+        surveyRemoteDataSource.sendUserAnswers(listUserRemote)
 
     suspend fun deleteQuestions() = surveyLocalDataSource.deleteQuestions()
 
@@ -28,4 +32,9 @@ class SurveyRepository(
 
     suspend fun storeUserAnswer(userAnswerLocal: UserAnswerLocal) =
         surveyLocalDataSource.storeUserAnswer(userAnswerLocal)
+
+    suspend fun getUserAnswers(
+        surveyId: String,
+        resolveAttempt: Int
+    ) = surveyLocalDataSource.getUserAnswers(surveyId, resolveAttempt)
 }

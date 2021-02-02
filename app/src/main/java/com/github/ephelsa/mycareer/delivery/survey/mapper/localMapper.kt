@@ -25,3 +25,6 @@ fun List<QuestionAndQuestionsAnswersRelation>.toDomain(): List<QuestionAndQuesti
     map { it.toDomain() }
 
 fun UserAnswerLocal.toDelivery() = UserAnswerEntity(surveyID, questionID, answer, resolveAttempt)
+
+@JvmName("toDomainUserAnswerEntity")
+fun List<UserAnswerEntity>.toDomain(): List<UserAnswerLocal> = map { it.toDomain() }
