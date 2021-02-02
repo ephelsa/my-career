@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="maxLines_normal">3</integer>
+    <item name="graphicAlpha_first" format="float" type="integer">1</item>
+    <item name="graphicAlpha_second" format="float" type="integer">0.8</item>
+    <item name="graphicAlpha_third" format="float" type="integer">0.7</item>
+    <item name="graphicAlpha_other" format="float" type="integer">0.5</item>
 </resources>

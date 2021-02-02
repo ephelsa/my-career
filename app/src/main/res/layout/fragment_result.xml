@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,8 +20,124 @@
     <LinearLayout
         android:id="@+id/score_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar_container"
-        android:orientation="vertical" />
+        android:layout_marginStart="@dimen/content_start"
+        android:layout_marginTop="@dimen/content_top"
+        android:layout_marginEnd="@dimen/content_end"
+        android:layout_marginBottom="@dimen/content_bottom"
+        android:orientation="vertical">
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/first_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_first_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            android:alpha="@integer/graphicAlpha_first"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/second_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_second_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_second"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/third_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_third_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_third"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/fourth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/fifth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/sixth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/seventh_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/eighth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/nineth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/tenth_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/specific_graphic_other_height"
+            android:layout_marginTop="@dimen/spacing_big"
+            android:alpha="@integer/graphicAlpha_other"
+            app:progressView_animation="decelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/blue_jeans"
+            app:progressView_labelSize="@dimen/font_normal" />
+
+    </LinearLayout>
 
 </RelativeLayout>

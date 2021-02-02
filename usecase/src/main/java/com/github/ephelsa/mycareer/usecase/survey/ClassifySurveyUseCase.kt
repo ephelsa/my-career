@@ -23,8 +23,8 @@ class ClassifySurveyUseCase(
                         documentType = it.data.documentType,
                         document = it.data.document,
                         email = it.data.email,
-                        surveyId = 1,
-                        resolveAttempt = 1
+                        surveyId = surveyID.toInt(),
+                        resolveAttempt = resolveAttempt
                     )
                     emit(surveyRepository.classifyAnswers(surveyClassifyRemote))
                 } else if (it is ResourceLocal.Error) {

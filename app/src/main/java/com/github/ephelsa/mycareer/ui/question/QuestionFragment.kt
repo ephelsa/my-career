@@ -31,9 +31,6 @@ class QuestionFragment :
     private val args: QuestionFragmentArgs by navArgs()
     private var currentQuestionPos: Int = 0
 
-    private val resolveAttempt = args.resolveAttempt
-    private val surveyId = args.surveyID.toString()
-
     override fun initializeBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -120,10 +117,10 @@ class QuestionFragment :
         question: QuestionAndQuestionsAnswersLocal
     ) {
         val userAnswerLocal = UserAnswerLocal(
-            surveyID = surveyId,
+            surveyID = args.surveyID.toString(),
             questionID = question.questionId.toString(),
             answer = answer,
-            resolveAttempt = resolveAttempt
+            resolveAttempt = args.resolveAttempt
         )
 
         viewModel.storeUserAnswer(userAnswerLocal, isValid)
@@ -160,13 +157,13 @@ class QuestionFragment :
     }
 
     private fun performResults() {
-        viewModel.sendStoredUserAnswers(surveyId, resolveAttempt)
+        viewModel.sendStoredUserAnswers(args.surveyID.toString(), args.resolveAttempt)
             .handleObservable(
                 onSuccess = {
                     navigate(
                         directions.actionQuestionFragmentToResultFragment(
-                            surveyId,
-                            resolveAttempt
+                            args.surveyID.toString(),
+                            args.resolveAttempt
                         )
                     )
                 }
