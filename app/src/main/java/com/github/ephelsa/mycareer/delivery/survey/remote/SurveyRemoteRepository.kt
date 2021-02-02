@@ -8,9 +8,7 @@ import com.github.ephelsa.mycareer.delivery.survey.mapper.toDelivery
 import com.github.ephelsa.mycareer.delivery.user.mapper.toDelivery
 import com.github.ephelsa.mycareer.domain.shared.ResourceRemote
 import com.github.ephelsa.mycareer.domain.shared.StatusRemote
-import com.github.ephelsa.mycareer.domain.survey.SurveyRemote
-import com.github.ephelsa.mycareer.domain.survey.SurveyWithQuestionsRemote
-import com.github.ephelsa.mycareer.domain.survey.UserAnswerRemote
+import com.github.ephelsa.mycareer.domain.survey.*
 import com.github.ephelsa.mycareer.domain.user.UserRemote
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -50,6 +48,16 @@ class SurveyRemoteRepository @Inject constructor(
                 handleSuccess(responseJSON.toDomain())
             } catch (e: Exception) {
                 handleError<StatusRemote>(e)
+            }
+        }
+
+    override suspend fun classifyAnswers(surveyClassifyRemote: SurveyClassifyRemote): ResourceRemote<List<ClassificationRemote>> =
+        withContext(dispatcher) {
+            try {
+                val responseJSON = surveyService.classifySurvey(surveyClassifyRemote.toDelivery())
+                handleSuccess(responseJSON.toDomain())
+            } catch (e: Exception) {
+                handleError<List<ClassificationRemote>>(e)
             }
         }
 }

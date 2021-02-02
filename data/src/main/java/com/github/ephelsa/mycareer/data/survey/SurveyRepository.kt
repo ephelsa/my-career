@@ -1,9 +1,6 @@
 package com.github.ephelsa.mycareer.data.survey
 
-import com.github.ephelsa.mycareer.domain.survey.QuestionAnswerLocal
-import com.github.ephelsa.mycareer.domain.survey.QuestionLocal
-import com.github.ephelsa.mycareer.domain.survey.UserAnswerLocal
-import com.github.ephelsa.mycareer.domain.survey.UserAnswerRemote
+import com.github.ephelsa.mycareer.domain.survey.*
 import com.github.ephelsa.mycareer.domain.user.UserRemote
 
 class SurveyRepository(
@@ -17,6 +14,9 @@ class SurveyRepository(
 
     suspend fun sendUserAnswers(listUserRemote: List<UserAnswerRemote>) =
         surveyRemoteDataSource.sendUserAnswers(listUserRemote)
+
+    suspend fun classifyAnswers(surveyClassifyRemote: SurveyClassifyRemote) =
+        surveyRemoteDataSource.classifyAnswers(surveyClassifyRemote)
 
     suspend fun deleteQuestions() = surveyLocalDataSource.deleteQuestions()
 
