@@ -43,6 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), View.OnClickListener
 
     private fun continueSession() {
         viewModel.storedCredentials.handleObservable(
+            enableDefaultError = false,
             onSuccess = {
                 val credentials = it.data.remoteTransform()
                 fillFields(credentials)
